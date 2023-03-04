@@ -41,7 +41,7 @@
     public Row? GetRow()
     {
         if (name == null)
-            return null;
+            throw new ArgumentNullException("name");
         var row = new Row(name, age);
         return row;
     }
@@ -57,20 +57,29 @@
         return true;
     }
 
-    public int CalculateNamelength()
+    public void CalculateNamelength()
     {
         if (name == null)
-            return -1;
+            throw new ArgumentNullException("name");
         if (IsCorrectData())
             nameLength = name.Length * nameLenghtCoefficient;
-        return 0;
     }
 
     public void SetValue(string name, int value)
     {
         if (name.Equals("age"))
-            age = value;
+            SetAge(value);
         if (name.Equals("score"))
-            score = value;
+            SetScore(value);
+    }
+
+    private void SetAge(int value)
+    {
+        age = value;
+    }
+
+    private void SetScore(int value)
+    {
+        score = value;
     }
 }

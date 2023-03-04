@@ -23,7 +23,7 @@ public class gMethods
         Console.WriteLine("platform: " + platform);
     }
 
-    public float GetAmount()
+    private float GetAmount()
     {
         if (IsPlatformNameGood())
             return amount * amountCoefficient;
