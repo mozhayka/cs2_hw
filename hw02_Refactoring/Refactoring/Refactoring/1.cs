@@ -8,34 +8,37 @@
     }
 
     private int age, score;
-    public string Age
+    public int Age
     {
         get { return age; }
         set { age = value; }
     }
-    public string Score
+    public int Score
     {
         get { return score; }
         set { score = value; }
     }
 
     int nameLength;
+    const int nameLenghtCoefficient = 4, minNameLength = 3;
+    const int minAge = 18, maxAge = 65;
 
     public class Row
     {
         public string Name { get; set; }
         public string Age { get; set; }
         public string Time { get; set; }
+        const double ageCoefficient = 0.83;
 
         public Row(string name, int age)
         {
-            row.Name = name;
-            row.Age = $"{age * 0.83}";
-            row.Time = DateTime.Now.ToString();
+            Name = name;
+            Age = $"{age * ageCoefficient}";
+            Time = DateTime.Now.ToString();
         }
     }
 
-    public Row getRow()
+    public Row? GetRow()
     {
         if (name == null)
             return null;
@@ -43,27 +46,27 @@
         return row;
     }
 
-    private bool isCorrect()
+    private bool IsCorrectData()
     {
-        if (name.Length < 3)
+        if (name.Length < minNameLength)
             return false;
-        if (age < 18 || age > 65)
+        if (age < minAge || age > maxAge)
             return false;
         if (score == -1)
             return false;
-        return true
+        return true;
     }
 
-    public int calculateNamelength()
+    public int CalculateNamelength()
     {
         if (name == null)
             return -1;
-        if (isCorrect())
-            nameLength = name.Length * 4;
+        if (IsCorrectData())
+            nameLength = name.Length * nameLenghtCoefficient;
         return 0;
     }
 
-    public void SetValue(string name, string value)
+    public void SetValue(string name, int value)
     {
         if (name.Equals("age"))
             age = value;

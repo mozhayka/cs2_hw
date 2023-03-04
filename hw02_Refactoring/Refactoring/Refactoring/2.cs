@@ -2,28 +2,46 @@ using System;
 
 public class gMethods
 {
-    public string Name;
+    public string Name { get; set; }
     private int price;
     private int amount;
     private string platform;
+    private const float amountCoefficient = 0.956f;
+    private const double tempCoefficient = 0.8;
+
     public void PrintPack()
     {
         this.PrintBanner();
-        // Print details. 
-        Console.WriteLine("name: " + this.name);
-        Console.WriteLine("amount: " + this.GetOutstanding());
+        this.PrintDetails();
+    }
+
+    private void PrintDetails()
+    {
+        Console.WriteLine("name: " + this.Name);
+        Console.WriteLine("amount: " + this.GetAmount());
         Console.WriteLine("price: " + this.price);
         Console.WriteLine("platform: " + platform);
     }
-    float GetAmnt()
+
+    public float GetAmount()
     {
-        if ((platform.ToUpper().IndexOf("PC") > -1) &&
-        (Name.ToUpper().IndexOf("XX") > -1) && amount > 0)
-            return amount * 0.956;
+        if (IsPlatformNameGood())
+            return amount * amountCoefficient;
+        ChangeTempAndWrite();
+        return -1;
+    }
+
+    private bool IsPlatformNameGood()
+    {
+        return (platform.ToUpper().IndexOf("PC") > -1) &&
+            (Name.ToUpper().IndexOf("XX") > -1) && amount > 0;
+    }
+
+    private void ChangeTempAndWrite()
+    {
         double temp = amount * price;
         Console.WriteLine(temp);
-        temp = 0.8 * amount * price;
+        temp = tempCoefficient * amount * price;
         Console.WriteLine(temp);
-        return -1;
     }
 }
