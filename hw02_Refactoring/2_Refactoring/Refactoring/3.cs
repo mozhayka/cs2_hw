@@ -13,9 +13,10 @@ class Fighter
 
     private void LogStatus(string name, int age, int health, int damage, int weaponStatus)
     {
-        Console.WriteLine($"name:{name}, " +
+        var LogText = $"name:{name}, " +
             $"age:{age}, health:{health}, " +
-            $"damage:{damage}, weaponStatus:{ weaponStatus}"); 
+            $"damage:{damage}, weaponStatus:{weaponStatus}";
+        Console.WriteLine(LogText); 
     }
 
     public int GetDamage()
