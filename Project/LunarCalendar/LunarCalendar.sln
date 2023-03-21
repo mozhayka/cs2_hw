@@ -13,11 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModel", "ViewModel", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Model\Calculator\Calculator.csproj", "{118F48A1-8117-41A6-A79F-01F940E404F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objects", "Model\Objects\Objects.csproj", "{533C22E1-E46A-4E91-95AE-518870B316B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Objects", "Model\Objects\Objects.csproj", "{533C22E1-E46A-4E91-95AE-518870B316B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayInformationCalculator", "ViewModel\DayInformationCalculator\DayInformationCalculator.csproj", "{3D6412DB-8B1A-42F9-B552-B1CFA38D7438}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayInformationCalculator", "ViewModel\DayInformationCalculator\DayInformationCalculator.csproj", "{3D6412DB-8B1A-42F9-B552-B1CFA38D7438}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "Test\TestProject\TestProject.csproj", "{477EE32B-88D4-43F7-8DB8-A1A357C552C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "Test\TestProject\TestProject.csproj", "{477EE32B-88D4-43F7-8DB8-A1A357C552C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{B9129E2B-4A68-4B80-B9EA-130A530B80A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +56,7 @@ Global
 		{118F48A1-8117-41A6-A79F-01F940E404F7} = {39C81C28-D251-47DA-AE89-DE7BC73E40C5}
 		{533C22E1-E46A-4E91-95AE-518870B316B2} = {39C81C28-D251-47DA-AE89-DE7BC73E40C5}
 		{3D6412DB-8B1A-42F9-B552-B1CFA38D7438} = {7426945E-03B0-406C-8F93-8AAA64B96837}
+		{477EE32B-88D4-43F7-8DB8-A1A357C552C2} = {B9129E2B-4A68-4B80-B9EA-130A530B80A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77CE9704-1171-42E2-B121-AA61A9CA50B0}
