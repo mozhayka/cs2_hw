@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Objects;
 
-namespace Calculator
+namespace ConsoleUI
 {
-    public class LBKCalculator : ILBKCalculator
+    internal class DayInformationPrinter
     {
-        public LBK FindAllLBK(DateTime day)
+        public static void Print(DayInformation info)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Printing day info");
         }
     }
 }

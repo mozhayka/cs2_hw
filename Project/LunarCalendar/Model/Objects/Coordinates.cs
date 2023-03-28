@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Objects;
 
-namespace Calculator
+namespace Objects
 {
-    public interface ILBKCalculator
+    public class Coordinates
     {
-        public LBK FindAllLBK(DateTime day);
+        public double X { get; set; }
+        public double Y { get; set; }
     }
 }

@@ -7,9 +7,14 @@ using Objects;
 
 namespace Calculator
 {
-    public class LBKCalculator : ILBKCalculator
+    internal class DayInformationCalculator
     {
-        public LBK FindAllLBK(DateTime day)
+        public DayInformationCalculator()
+        {
+
+        }
+
+        public DayInformation Calculate(DateTime day, Coordinates coordinates)
         {
             throw new NotImplementedException();
         }

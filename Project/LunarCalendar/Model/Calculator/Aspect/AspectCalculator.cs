@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Objects;
 
-namespace Calculator.Aspect
+namespace Calculator
 {
-    public class AspectsCalculator
+    public class AspectsCalculator : IAspectCalculator
     {
+        public List<Aspect> FindAllAspects(DateTime day)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Calculator.Helper
+﻿namespace Calculator
 {
     public class TimeCalculator
     {
