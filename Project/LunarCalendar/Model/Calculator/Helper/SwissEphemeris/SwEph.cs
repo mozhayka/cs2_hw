@@ -44,12 +44,10 @@ namespace Calculator.SwissEphemeris
         public const int SE_URANUS = 7;
         public const int SE_NEPTUNE = 8;
         public const int SE_PLUTO = 9;
-        public const int SE_TRUE_NODE = 11;
-        public const int SE_LILIT = 12;
 
 
-        //[DllImport("swedll32.dll")]
-        //public static extern void swe_set_ephe_path(string path);
+        [DllImport("swedll32.dll")]
+        public static extern void swe_set_ephe_path(string path);
 
         [DllImport("swedll32.dll")]
         public static extern double swe_julday(int year, int mon, int mday, double hour, int gregflag);
@@ -62,21 +60,5 @@ namespace Calculator.SwissEphemeris
 
         [DllImport("swedll32.dll")]
         public static extern void swe_set_topo(double geolon, double geolat, double geoalt);
-
-        //[DllImport("swedll32.dll")]
-        //public static extern int swe_sol_eclipse_when_loc(double jd, int ifl, double[] geopos, double[] tret, double[] attr, int backwards, StringBuilder serr);
-
-        //[DllImport("swedll32.dll")]
-        //public static extern int swe_lun_eclipse_when_loc(double jd, int ifl, double[] geopos, double[] tret, double[] attr, int backwards, StringBuilder serr);
-
-        [DllImport("swedll32.dll")]
-        public static extern int swe_sol_eclipse_when_glob(double jd, int ifl, int ifltype, double[] tret, int backwards, StringBuilder serr);
-
-        //[DllImport("swedll32.dll")]
-        //public static extern int swe_lun_eclipse_when_glob(double jd, int ifl, int ifltype, double[] tret, int backwards, StringBuilder serr);
-
-        [DllImport("swedll32.dll")]
-        public static extern int swe_lun_eclipse_when(double jd, int ifl, int ifltype, double[] tret, int backwards, StringBuilder serr);
-
     }
 }

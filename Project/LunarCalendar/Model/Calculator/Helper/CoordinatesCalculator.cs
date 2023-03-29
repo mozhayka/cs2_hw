@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Calculator.Helper
+namespace Calculator
 {
-    internal class CoordinateCalculator
+    internal class CoordinatesCalculator
     {
         public static double dms2deg(int deg, int minute, int second)
         {
