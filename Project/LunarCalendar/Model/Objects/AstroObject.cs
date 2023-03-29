@@ -1,12 +1,15 @@
-﻿public enum AstroObject
+﻿namespace Objects
 {
-    Sun,
-    Moon,
-    Mercury,
-    Venus,
-    Mars,
-    Jupiter,
-    Saturn,
-    Uranus,
-    Neptune
+    public enum AstroObject
+    {
+        Sun,
+        Moon,
+        Mercury,
+        Venus,
+        Mars,
+        Jupiter,
+        Saturn,
+        Uranus,
+        Neptune
+    }
 }

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Model\Objects\Objects.csproj" />
+    <ProjectReference Include="..\..\Model\Calculator\Calculator.csproj" />
   </ItemGroup>
 
 </Project>

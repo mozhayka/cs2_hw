@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConsoleUI.ConsoleRunner;
 using LunarCalendarVM;
 
 namespace ConsoleUI
@@ -11,12 +7,13 @@ namespace ConsoleUI
     {
         public static void Start()
         {
-            Console.WriteLine("Start Lunar Calendar");
-            var date = ConsoleReader.ReadDate();
-            var coordinates = ConsoleReader.ReadCoordinates();
+            var console = new ConsoleWorker();
+            console.Greetings();
+            var date = console.ReadDate();
+            var coordinates = console.ReadCoordinates();
 
             var lc = new LunarCalendar(date, coordinates);
-            DayInformationPrinter.Print(lc.GetDayInformation());
+            console.Print(lc.GetDayInformation());
         }
     }
 }

@@ -5,11 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Objects;
 
-namespace ConsoleUI
+namespace ConsoleUI.ConsoleRunner
 {
-    internal class ConsoleReader
+    // Interface Segregation Principle - разделили интерфейс работы с консолью на IPrinter и IReader
+    internal class ConsoleWorker : IPrinter, IReader
     {
-        public static DateTime ReadDate()
+        public void Greetings()
+        {
+            Console.WriteLine("Start Lunar Calendar");
+        }
+
+        public void Print(DayInformation info)
+        {
+            Console.WriteLine("Printing day info");
+            throw new NotImplementedException();
+        }
+
+        public DateTime ReadDate()
         {
             Console.WriteLine("Write date: ");
             var date = Console.ReadLine();
@@ -19,7 +31,7 @@ namespace ConsoleUI
             return StringToDate(date);
         }
 
-        public static Coordinates ReadCoordinates()
+        public Coordinates ReadCoordinates()
         {
             Console.WriteLine("Write coordinates: ");
             var date = Console.ReadLine();
@@ -31,12 +43,12 @@ namespace ConsoleUI
 
         private static DateTime StringToDate(string s)
         {
-            return new DateTime(long.Parse(s));
+            throw new NotImplementedException();
         }
 
         private static Coordinates StringToCoordinates(string s)
         {
-            return new Coordinates();
+            throw new NotImplementedException();
         }
     }
 }
