@@ -10,6 +10,7 @@
         Jupiter,
         Saturn,
         Uranus,
-        Neptune
+        Neptune,
+        Pluto,
     }
 }
