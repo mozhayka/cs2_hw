@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Calculator.SwissEphemeris;
 using Objects;
 
@@ -10,11 +6,13 @@ namespace Calculator
 {
     internal class PlanetPositionCalculator
     {
-        public PlanetPositionCalculator(double latitude, double longitude, double geoalt = 0)
+        public Coordinates Coordinates { get; set; }
+        public PlanetPositionCalculator(Coordinates coordinates)
         {
+            Coordinates = coordinates;
             // Инициализация SwEph
             SwEph.swe_set_ephe_path(null);
-            SwEph.swe_set_topo(longitude, latitude, geoalt);
+            SwEph.swe_set_topo(coordinates.Longitude, coordinates.Latitude, coordinates.Geoalt);
         }
 
         public double CalculatePosition(AstroObject planet, double jd)
@@ -35,7 +33,7 @@ namespace Calculator
             };
         }
 
-        public double CalcMoon(double jd)
+        private double CalcMoon(double jd)
         {
             var moon_xx = new double[6];
             var moon_serr = new StringBuilder(1000);
@@ -44,7 +42,7 @@ namespace Calculator
             return moon_xx[0];
         }
 
-        public double CalcSun(double jd)
+        private double CalcSun(double jd)
         {
             var sun_xx = new double[6];
             var sun_serr = new StringBuilder(1000);
@@ -53,7 +51,7 @@ namespace Calculator
             return sun_xx[0];
         }
 
-        public double CalcMerc(double jd)
+        private double CalcMerc(double jd)
         {
             var merc_xx = new double[6];
             var merc_serr = new StringBuilder(1000);
@@ -62,7 +60,7 @@ namespace Calculator
             return merc_xx[0];
         }
 
-        public double CalcVenus(double jd)
+        private double CalcVenus(double jd)
         {
             var venus_xx = new double[6];
             var venus_serr = new StringBuilder(1000);
@@ -71,7 +69,7 @@ namespace Calculator
             return venus_xx[0];
         }
 
-        public double CalcMars(double jd)
+        private double CalcMars(double jd)
         {
             var mars_xx = new double[6];
             var mars_serr = new StringBuilder(1000);
@@ -80,7 +78,7 @@ namespace Calculator
             return mars_xx[0];
         }
 
-        public double CalcJupiter(double jd)
+        private double CalcJupiter(double jd)
         {
             var jup_xx = new double[6];
             var jup_serr = new StringBuilder(1000);
@@ -89,7 +87,7 @@ namespace Calculator
             return jup_xx[0];
         }
 
-        public double CalcSaturn(double jd)
+        private double CalcSaturn(double jd)
         {
             var saturn_xx = new double[6];
             var saturn_serr = new StringBuilder(1000);
@@ -98,7 +96,7 @@ namespace Calculator
             return saturn_xx[0];
         }
 
-        public double CalcUran(double jd)
+        private double CalcUran(double jd)
         {
             var uran_xx = new double[6];
             var uran_serr = new StringBuilder(1000);
@@ -107,7 +105,7 @@ namespace Calculator
             return uran_xx[0];
         }
 
-        public double CalcNeptun(double jd)
+        private double CalcNeptun(double jd)
         {
             var nept_xx = new double[6];
             var nept_serr = new StringBuilder(1000);
@@ -116,7 +114,7 @@ namespace Calculator
             return nept_xx[0];
         }
 
-        public double CalcPluto(double jd)
+        private double CalcPluto(double jd)
         {
             var pluto_xx = new double[6];
             var pluto_serr = new StringBuilder(1000);

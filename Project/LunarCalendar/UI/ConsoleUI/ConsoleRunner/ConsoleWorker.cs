@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Objects;
+﻿using Objects;
 
 namespace ConsoleUI.ConsoleRunner
 {
@@ -34,11 +29,8 @@ namespace ConsoleUI.ConsoleRunner
         public Coordinates ReadCoordinates()
         {
             Console.WriteLine("Write coordinates: ");
-            var date = Console.ReadLine();
-            if (date == null)
-                return new Coordinates();
-
-            return StringToCoordinates(date);
+            var coordinates = Console.ReadLine();
+            throw new NotImplementedException();
         }
 
         private static DateTime StringToDate(string s)
