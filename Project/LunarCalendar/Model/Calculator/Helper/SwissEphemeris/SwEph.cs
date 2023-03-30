@@ -32,7 +32,7 @@ namespace Calculator.SwissEphemeris
         SEFLG_JPLHOR_APPROX = (512 * 1024)   /* approximate JPL Horizons 1962 - today */
     }
 
-    class SwEph
+    internal class SwEph
     {
         public const int SE_SUN = 0;
         public const int SE_MOON = 1;
