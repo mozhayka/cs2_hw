@@ -4,7 +4,7 @@ namespace Calculator
 {
     // The Single Responsibility Principle - все классы в проекте Calculator выполняют только свою задачу
     
-    internal class DayInformationCalculator
+    public class DayInformationCalculator : IDayInformationCalculator
     {
         public DayInformationCalculator()
         {

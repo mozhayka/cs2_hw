@@ -2,11 +2,11 @@
 
 namespace Calculator
 {
-    public class TimeCalculator
+    internal class TimeCalculator
     {
         public static double GetJulDay(DateTime utcDate)
         {
-            return SwEph.swe_julday(utcDate.Year, utcDate.Month, utcDate.Day, hms2hh(utcDate.Hour, utcDate.Minute, utcDate.Second), 1);
+            return SwEph.swe_julday(utcDate.Year, utcDate.Month, utcDate.Day, HMS2Hours(utcDate.Hour, utcDate.Minute, utcDate.Second), 1);
         }
 
         public static DateTime FromJulDay(double julDay)
@@ -24,7 +24,7 @@ namespace Calculator
             return new DateTime(year, mon, day, hour, minute, second, DateTimeKind.Unspecified);
         }
 
-        private static double hms2hh(int hour, int minute, int second)
+        private static double HMS2Hours(int hour, int minute, int second)
         {
             return hour + minute / 60.0 + second / 3600.0;
         }

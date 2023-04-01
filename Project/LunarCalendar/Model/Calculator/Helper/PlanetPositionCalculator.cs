@@ -1,10 +1,11 @@
 ﻿using System.Text;
+using Calculator.Helper;
 using Calculator.SwissEphemeris;
 using Objects;
 
 namespace Calculator
 {
-    internal class PlanetPositionCalculator
+    internal class PlanetPositionCalculator : IPlanetPositionCalculator
     {
         public Coordinates Coordinates { get; set; }
         public PlanetPositionCalculator(Coordinates coordinates)

@@ -2,7 +2,7 @@
 
 namespace Calculator
 {
-    public class LBKCalculator : ILBKCalculator
+    internal class LBKCalculator : ILBKCalculator
     {
         public LBK FindAllLBK(DateTime day)
         {

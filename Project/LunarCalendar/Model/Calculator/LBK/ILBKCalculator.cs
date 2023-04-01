@@ -2,7 +2,7 @@
 
 namespace Calculator
 {
-    public interface ILBKCalculator
+    internal interface ILBKCalculator
     {
         public LBK FindAllLBK(DateTime day);
     }

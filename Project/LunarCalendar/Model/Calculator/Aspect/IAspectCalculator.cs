@@ -2,7 +2,7 @@
 
 namespace Calculator
 {
-    public interface IAspectCalculator
+    internal interface IAspectCalculator
     {
         public List<Aspect> FindAllAspects(DateTime day, Coordinates coorinates);
     }
