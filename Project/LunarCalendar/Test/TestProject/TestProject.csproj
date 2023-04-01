@@ -6,7 +6,15 @@
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
+
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Model\Calculator\Helper\SwissEphemeris\swedll32.dll" Link="swedll32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />

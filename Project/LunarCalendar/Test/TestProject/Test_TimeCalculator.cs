@@ -19,7 +19,7 @@ namespace TestProject
         {
             var utcDate = new DateTime(1977, 8, 1);
 
-            var expected = 2443356;
+            var expected = 2443356.5;
             var actual = TimeCalculator.GetJulDay(utcDate);
 
             Assert.That(actual, Is.EqualTo(expected));
@@ -28,7 +28,7 @@ namespace TestProject
         [Test]
         public void Test1_FromJulDay()
         {
-            var julday = 2443356;
+            var julday = 2443356.5;
 
             var expected = new DateTime(1977, 8, 1);
             var actual = TimeCalculator.FromJulDay(julday);

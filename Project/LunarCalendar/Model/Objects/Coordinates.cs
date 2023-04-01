@@ -13,15 +13,29 @@
             Geoalt = geoalt;
         }
 
-        public Coordinates(int lon_deg, int lon_min, int lon_sec, int lat_deg, int lat_min, int lat_sec, double geoalt = 0)
-            : this(DMS2DEG(lon_deg, lon_min, lon_sec), DMS2DEG(lat_deg, lat_min, lat_sec), geoalt)
+        public Coordinates(DMS longitude, DMS latitude, double geoalt = 0)
+            : this(longitude.ToDegrees(), latitude.ToDegrees(), geoalt)
         {
 
         }
+    }
 
-        private static double DMS2DEG(int deg, int minute, int second)
+    public class DMS
+    {
+        public double Degrees { get; set; }
+        public double Minutes { get; set; }
+        public double Seconds { get; set; }
+
+        public DMS(double degrees, double minutes, double seconds)
         {
-            return deg + minute / 60.0 + second / 3600.0;
+            Degrees = degrees;
+            Minutes = minutes;
+            Seconds = seconds;
+        }
+
+        public double ToDegrees()
+        {
+            return Degrees + Minutes / 60.0 + Seconds / 3600.0;
         }
     }
 }
