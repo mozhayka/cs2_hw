@@ -4,7 +4,7 @@ namespace Calculator
 {
     internal class LBKCalculator : ILBKCalculator
     {
-        public LBK FindAllLBK(DateTime day)
+        public List<LBK> FindAllLBK(DateTime day, Coordinates coordinates)
         {
             throw new NotImplementedException();
         }

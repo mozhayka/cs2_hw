@@ -6,22 +6,25 @@ namespace Calculator
     
     public class DayInformationCalculator : IDayInformationCalculator
     {
-        public DayInformationCalculator()
-        {
+        // Dependency Inversion Principle - связываемся с AspectsCalculator через интерфейс
+        private readonly IAspectCalculator _AspectCalculator;
+        private readonly ILBKCalculator _LBKCalculator;
 
+        public DayInformationCalculator()
+            : this(new AspectsCalculator(), new LBKCalculator())
+        { }
+
+        internal DayInformationCalculator(IAspectCalculator aspectCalculator, ILBKCalculator lbkCalculator)
+        {
+            _AspectCalculator = aspectCalculator;
+            _LBKCalculator = lbkCalculator;
         }
 
         public DayInformation Calculate(DateTime day, Coordinates coordinates)
         {
-            CalculateAspects(day, coordinates);
-            throw new NotImplementedException();
-        }
-
-        // Dependency Inversion Principle - связываемся с AspectsCalculator через интерфейс
-        private List<Aspect> CalculateAspects(DateTime day, Coordinates coordinates)
-        {
-            IAspectCalculator aspectsCalculator = new AspectsCalculator();
-            return aspectsCalculator.FindAllAspects(day, coordinates);
+            var listOfAspects = _AspectCalculator.FindAllAspects(day, coordinates);
+            var lbk = _LBKCalculator.FindAllLBK(day, coordinates);
+            return new DayInformation(day, coordinates, listOfAspects, lbk);
         }
     }
 }
