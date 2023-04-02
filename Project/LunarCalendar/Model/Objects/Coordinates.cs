@@ -6,7 +6,7 @@
         public double Latitude { get; set; }
         public double Geoalt { get; set; }
 
-        public Coordinates(double longitude, double latitude, double geoalt)
+        public Coordinates(double longitude, double latitude, double geoalt = 0)
         {
             Longitude = longitude;
             Latitude = latitude;

@@ -17,3 +17,4 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("e4033641-ec32-4660-887a-8e52a76a238b")]
 [assembly: InternalsVisibleTo("TestProject")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
