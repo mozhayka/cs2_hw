@@ -19,6 +19,18 @@ namespace TestProject
         }
 
         [Test]
+        public void Test_Stub_LBKCalculator()
+        {
+            // Arrange
+            var stubLBK = Mock.Of<ILBKCalculator>(
+                lbk => lbk.FindAllLBK(It.IsAny<DateTime>(), It.IsAny<Coordinates>()) == new List<LBK>());
+
+            var lbk = stubLBK.FindAllLBK(new DateTime(), new Coordinates(0, 0));
+            // Assert
+            Assert.That(lbk, Is.EqualTo(new List<LBK>()));
+        }
+
+        [Test]
         public void Test_Mock_DayInformationCalculator()
         {
             // Arrange
@@ -33,8 +45,8 @@ namespace TestProject
             calculator.Calculate(date, coordinates);
 
             // Assert
-            mockAspect.Verify(lw => lw.FindAllAspects(date, coordinates));
-            mockLBK.Verify(lw => lw.FindAllLBK(date, coordinates));
+            mockAspect.Verify(asp => asp.FindAllAspects(date, coordinates));
+            mockLBK.Verify(lbk => lbk.FindAllLBK(date, coordinates));
         }
     }
 }
