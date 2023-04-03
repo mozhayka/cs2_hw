@@ -7,6 +7,7 @@ using Calculator;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Objects;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace TestProject.Tests_DIContainer
 {
@@ -20,9 +21,8 @@ namespace TestProject.Tests_DIContainer
         [Test]
         public void Test_Transient()
         {
-            IServiceCollection services = new ServiceCollection();
-
-            services.AddTransient(c => new Mock<ICar>());
+            IServiceCollection services = new ServiceCollection()
+                .AddTransient(c => new Mock<ICar>());
 
             var ServiceProvider = services.BuildServiceProvider();
 
@@ -41,9 +41,8 @@ namespace TestProject.Tests_DIContainer
         [Test]
         public void Test_Singleton()
         {
-            IServiceCollection services = new ServiceCollection();
-
-            services.AddSingleton(c => new Mock<ICar>());
+            IServiceCollection services = new ServiceCollection()
+                .AddSingleton(c => new Mock<ICar>());
 
             var ServiceProvider = services.BuildServiceProvider();
 
@@ -62,34 +61,32 @@ namespace TestProject.Tests_DIContainer
         [Test]
         public void Test_Scoped()
         {
-            IServiceCollection services = new ServiceCollection();
-
-            services.AddScoped(c => new Mock<ICar>());
+            IServiceCollection services = new ServiceCollection()
+                .AddScoped(c => new Mock<ICar>());
 
             var ServiceProvider = services.BuildServiceProvider();
 
-            using (IServiceScope newScope = ServiceProvider.CreateScope())
-            {
-                // Arrange
-                var car1 = ServiceProvider.GetRequiredService<Mock<ICar>>();
-                var car2 = ServiceProvider.GetRequiredService<Mock<ICar>>();
+            using IServiceScope scope1 = ServiceProvider.CreateScope();
+            using IServiceScope scope2 = ServiceProvider.CreateScope();
 
-                using (IServiceScope newScope2 = ServiceProvider.CreateScope())
-                {
-                    var car3 = ServiceProvider.GetRequiredService<Mock<ICar>>();
-                    var car4 = ServiceProvider.GetRequiredService<Mock<ICar>>();
+            // Arrange
+            var car1 = ServiceProvider.GetRequiredService<Mock<ICar>>();
+            var car2 = ServiceProvider.GetRequiredService<Mock<ICar>>();
 
-                    // Act
-                    car1.Object.Beep();
+            var car3 = scope1.ServiceProvider.GetRequiredService<Mock<ICar>>();
+            var car4 = scope2.ServiceProvider.GetRequiredService<Mock<ICar>>();
 
-                    // Assert
-                    car1.Verify(car => car.Beep(), Times.Once());
-                    car2.Verify(car => car.Beep(), Times.Once());
+            // Act
+            car1.Object.Beep();
+            car2.Object.Beep();
+            car3.Object.Beep();
 
-                    car3.Verify(car => car.Beep(), Times.Never());
-                    car4.Verify(car => car.Beep(), Times.Never());
-                }
-            }
+            // Assert
+            car1.Verify(car => car.Beep(), Times.Exactly(2));
+            car2.Verify(car => car.Beep(), Times.Exactly(2));
+
+            car3.Verify(car => car.Beep(), Times.Once());
+            car4.Verify(car => car.Beep(), Times.Never());
         }
 
         public interface ICar
