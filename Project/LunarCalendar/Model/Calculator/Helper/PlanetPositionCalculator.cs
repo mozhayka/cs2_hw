@@ -5,9 +5,10 @@ using Objects;
 
 namespace Calculator
 {
-    internal class PlanetPositionCalculator : IPlanetPositionCalculator
+    public class PlanetPositionCalculator : IPlanetPositionCalculator
     {
         public Coordinates? CurrentCoordinates { get; set; }
+
         public PlanetPositionCalculator()
         {
             // Инициализация SwEph

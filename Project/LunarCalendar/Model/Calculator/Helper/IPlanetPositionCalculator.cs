@@ -7,7 +7,7 @@ using Objects;
 
 namespace Calculator.Helper
 {
-    internal interface IPlanetPositionCalculator
+    public interface IPlanetPositionCalculator
     {
         public double CalculatePosition(AstroObject planet, double jd, Coordinates coordinates);
     }

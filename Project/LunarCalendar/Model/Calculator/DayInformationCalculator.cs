@@ -10,11 +10,11 @@ namespace Calculator
         private readonly IAspectCalculator _AspectCalculator;
         private readonly ILBKCalculator _LBKCalculator;
 
-        public DayInformationCalculator()
+/*        public DayInformationCalculator()
             : this(new AspectsCalculator(), new LBKCalculator())
-        { }
+        { }*/
 
-        internal DayInformationCalculator(IAspectCalculator aspectCalculator, ILBKCalculator lbkCalculator)
+        public DayInformationCalculator(IAspectCalculator aspectCalculator, ILBKCalculator lbkCalculator)
         {
             _AspectCalculator = aspectCalculator;
             _LBKCalculator = lbkCalculator;
