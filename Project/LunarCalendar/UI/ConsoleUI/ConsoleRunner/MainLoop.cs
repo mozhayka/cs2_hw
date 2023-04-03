@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Metrics;
-using ConsoleUI.ConsoleRunner;
+﻿using ConsoleUI.ConsoleRunner;
 using LunarCalendarVM;
 using Microsoft.Extensions.DependencyInjection;
 

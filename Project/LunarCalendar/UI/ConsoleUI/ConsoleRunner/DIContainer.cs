@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Calculator;
+﻿using Calculator;
 using Calculator.Helper;
 using LunarCalendarVM;
 using Microsoft.Extensions.DependencyInjection;
