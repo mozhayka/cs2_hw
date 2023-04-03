@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Model\Calculator\Calculator.csproj" />
+    <ProjectReference Include="..\..\UI\ConsoleUI\ConsoleUI.csproj" />
   </ItemGroup>
 
 </Project>
