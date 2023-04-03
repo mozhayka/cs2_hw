@@ -2,7 +2,7 @@
 
 namespace ConsoleUI.ConsoleRunner
 {
-    internal interface IPrinter
+    internal interface IWriter
     {
         public void Greetings();
         public void Print(DayInformation info);

@@ -3,7 +3,7 @@
 namespace ConsoleUI.ConsoleRunner
 {
     // Interface Segregation Principle - разделили интерфейс работы с консолью на IPrinter и IReader
-    internal class ConsoleWorker : IPrinter, IReader
+    internal class ConsoleWorker : IReader, IWriter
     {
         public void Greetings()
         {

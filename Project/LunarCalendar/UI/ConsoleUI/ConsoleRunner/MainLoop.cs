@@ -1,5 +1,7 @@
-﻿using ConsoleUI.ConsoleRunner;
+﻿using System.Diagnostics.Metrics;
+using ConsoleUI.ConsoleRunner;
 using LunarCalendarVM;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ConsoleUI
 {
@@ -7,13 +9,16 @@ namespace ConsoleUI
     {
         public static void Start()
         {
-            var console = new ConsoleWorker();
-            console.Greetings();
-            var date = console.ReadDate();
-            var coordinates = console.ReadCoordinates();
+            var di = new DIContainer();
+            var consoleWriter = di.ServiceProvider.GetRequiredService<IWriter>();
+            var consoleReader = di.ServiceProvider.GetRequiredService<IReader>();
+            var lc = di.ServiceProvider.GetRequiredService<ILunarCalendar>();
 
-            // var lc = new LunarCalendar();
-            // console.Print(lc.GetDayInformation());
+            consoleWriter.Greetings();
+            lc.Date = consoleReader.ReadDate();
+            lc.Coordinates = consoleReader.ReadCoordinates();
+
+            consoleWriter.Print(lc.GetDayInformation());
         }
     }
 }

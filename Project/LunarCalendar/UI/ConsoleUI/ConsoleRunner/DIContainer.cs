@@ -13,30 +13,49 @@ namespace ConsoleUI.ConsoleRunner
 {
     internal class DIContainer
     {
-        public IServiceCollection Container { get; set; }
-
+        public ServiceProvider ServiceProvider { get; private set; }
+        private readonly IServiceCollection services;
+        
         public DIContainer(IServiceCollection services)
         {
-            Container = services;
+            this.services = services;
+            CompositionRoot();
+            ServiceProvider = services.BuildServiceProvider();
         }
 
         public DIContainer()
             : this(new ServiceCollection())
         { }
 
-        public void CompositionRoot()
+        private void CompositionRoot()
         {
-            Container.AddSingleton<IPlanetPositionCalculator, PlanetPositionCalculator>();
+            BindCalculator();
+            BindConsoleUI();
+            BindVM();
+        }
+
+        private void BindCalculator()
+        {
+            services.AddTransient<IPlanetPositionCalculator, PlanetPositionCalculator>();
 
             // Container сам видит, что для сервиса IPlanetPositionCalculator зарегистрирована реализация PlanetPositionCalculator,
             // поэтому при создании объекта AspectsCalculator неявно создает объект PlanetPositionCalculator
             // и передает его в конструктор AspectsCalculator
-            Container.AddTransient<IAspectCalculator, AspectsCalculator>();
-            Container.AddTransient<ILBKCalculator, LBKCalculator>();
+            services.AddTransient<IAspectCalculator, AspectsCalculator>();
+            services.AddTransient<ILBKCalculator, LBKCalculator>();
 
-            Container.AddTransient<IDayInformationCalculator, DayInformationCalculator>();
+            services.AddTransient<IDayInformationCalculator, DayInformationCalculator>();
+        }
 
-            Container.AddScoped<ILunarCalendar, LunarCalendar>();
+        private void BindConsoleUI()
+        {
+            services.AddSingleton<IReader, ConsoleWorker>();
+            services.AddSingleton<IWriter, ConsoleWorker>();
+        }
+
+        private void BindVM()
+        {
+            services.AddScoped<ILunarCalendar, LunarCalendar>();
         }
     }
 }
