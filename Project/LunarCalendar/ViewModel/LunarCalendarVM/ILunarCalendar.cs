@@ -7,11 +7,10 @@ using Objects;
 
 namespace LunarCalendarVM
 {
-    internal interface ILunarCalendar
+    public interface ILunarCalendar
     {
-        public void SetDate(DateTime newDate);
-
-        public void SetCoordinates(Coordinates newCoordinates);
+        public DateTime Date { get; set; }
+        public Coordinates Coordinates { get; set; }
 
         public DayInformation GetDayInformation();
     }

@@ -12,8 +12,8 @@ namespace ConsoleUI
             var date = console.ReadDate();
             var coordinates = console.ReadCoordinates();
 
-            var lc = new LunarCalendar(date, coordinates);
-            console.Print(lc.GetDayInformation());
+            // var lc = new LunarCalendar();
+            // console.Print(lc.GetDayInformation());
         }
     }
 }

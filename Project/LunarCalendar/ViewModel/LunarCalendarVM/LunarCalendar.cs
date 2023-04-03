@@ -5,30 +5,39 @@ namespace LunarCalendarVM
 {
     public class LunarCalendar : ILunarCalendar
     {
-        public DateTime Date { get; private set; }
-        public Coordinates Coordinates { get; private set; }
+        public DateTime Date { get; set; }
+        public Coordinates Coordinates { get; set; } = new();
         private readonly IDayInformationCalculator Calculator;
 
-        public LunarCalendar(DateTime date, Coordinates coordinates, IDayInformationCalculator calculator)
+        public LunarCalendar(IDayInformationCalculator calculator)
         {
             Calculator = calculator;
-            Date = date;
-            Coordinates = coordinates;
-        }
-
-        public void SetDate(DateTime newDate)
-        {
-            Date = newDate;
-        }
-
-        public void SetCoordinates(Coordinates newCoordinates)
-        {
-            Coordinates = newCoordinates;
         }
 
         public DayInformation GetDayInformation()
         {
-            return Calculator.Calculate(Date, Coordinates);
+            if (IsSavedInDB())
+            {
+                return LoadFromDB();
+            }
+            var dayInfo = Calculator.Calculate(Date, Coordinates);
+            SaveToDB(dayInfo);
+            return dayInfo;
+        }
+
+        private bool IsSavedInDB()
+        {
+            return false;
+        }
+
+        private DayInformation LoadFromDB()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SaveToDB(DayInformation dayInformation)
+        {
+            // TODO implement DB
         }
     }
 }

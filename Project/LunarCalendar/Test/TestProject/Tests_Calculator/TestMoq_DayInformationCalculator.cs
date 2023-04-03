@@ -25,7 +25,9 @@ namespace TestProject
             var stubLBK = Mock.Of<ILBKCalculator>(
                 lbk => lbk.FindAllLBK(It.IsAny<DateTime>(), It.IsAny<Coordinates>()) == new List<LBK>());
 
+            // Act
             var lbk = stubLBK.FindAllLBK(new DateTime(), new Coordinates(0, 0));
+
             // Assert
             Assert.That(lbk, Is.EqualTo(new List<LBK>()));
         }

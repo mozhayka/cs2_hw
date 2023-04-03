@@ -15,9 +15,11 @@
 
         public Coordinates(DMS longitude, DMS latitude, double geoalt = 0)
             : this(longitude.ToDegrees(), latitude.ToDegrees(), geoalt)
-        {
+        { }
 
-        }
+        public Coordinates()
+            : this(0, 0)
+        { }
     }
 
     public class DMS
