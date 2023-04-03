@@ -7,19 +7,24 @@ namespace Calculator
 {
     internal class PlanetPositionCalculator : IPlanetPositionCalculator
     {
-        public Coordinates Coordinates { get; set; }
-        public PlanetPositionCalculator(Coordinates coordinates)
+        public Coordinates? CurrentCoordinates { get; set; }
+        public PlanetPositionCalculator()
         {
-            Coordinates = coordinates;
             // Инициализация SwEph
             SwEph.swe_set_ephe_path(null);
-            SwEph.swe_set_topo(coordinates.Longitude, coordinates.Latitude, coordinates.Geoalt);
         }
 
-        public double CalculatePosition(AstroObject planet, double jd)
+        public double CalculatePosition(AstroObject planet, double jd, Coordinates coordinates)
         {
+            if (CurrentCoordinates == null || CurrentCoordinates != coordinates)
+            {
+                CurrentCoordinates = coordinates;
+                SwEph.swe_set_topo(coordinates.Longitude, coordinates.Latitude, coordinates.Geoalt);
+            }
+
             return planet switch
             {
+                AstroObject.Moon => CalcMoon(jd),
                 AstroObject.Sun => CalcSun(jd),
                 AstroObject.Mercury => CalcMerc(jd),
                 AstroObject.Venus => CalcVenus(jd),
@@ -29,7 +34,6 @@ namespace Calculator
                 AstroObject.Uranus => CalcUran(jd),
                 AstroObject.Neptune => CalcNeptun(jd),
                 AstroObject.Pluto => CalcPluto(jd),
-                AstroObject.Moon => CalcMoon(jd),
                 _ => throw new Exception("Unknow astro object"),
             };
         }

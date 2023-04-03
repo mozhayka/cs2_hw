@@ -9,6 +9,6 @@ namespace Calculator.Helper
 {
     internal interface IPlanetPositionCalculator
     {
-        public double CalculatePosition(AstroObject planet, double jd);
+        public double CalculatePosition(AstroObject planet, double jd, Coordinates coordinates);
     }
 }
