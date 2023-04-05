@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System;
+using System.Text;
 using Calculator.Helper;
 using Calculator.SwissEphemeris;
 using Objects;
@@ -12,7 +14,7 @@ namespace Calculator
         public PlanetPositionCalculator()
         {
             // Инициализация SwEph
-            SwEph.swe_set_ephe_path(null);
+            // SwEph.swe_set_ephe_path("C:\\Users\\mozha\\HOMEWORK\\8sem\\CSHARP\\Homework\\Project\\LunarCalendar\\Model\\Calculator\\Helper\\SwissEphemeris\\swedll32.dll");
         }
 
         public double CalculatePosition(AstroObject planet, double jd, Coordinates coordinates)

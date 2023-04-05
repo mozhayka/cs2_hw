@@ -24,7 +24,7 @@ namespace Calculator
 
         public List<Aspect> FindAllAspects(double jdFrom, double jdTo, Coordinates coorinates)
         {
-            List<Aspect> aspects = new List<Aspect>();
+            var aspects = new List<Aspect>();
             for (int i = 0; i < InterestingPlanets.Length; i++)
             {
                 var planet1 = InterestingPlanets[i];
@@ -78,7 +78,8 @@ namespace Calculator
             var aspectType = AspectTypeCalc.GetAspectType(angle, eps);
 
             if (aspectType == null)
-                throw new Exception($"Coludn't recognize aspect type\n angle = {angle}, eps = {eps}");
+                throw new Exception($"Coludn't recognize aspect type\n" +
+                    $"angle = {angle}, eps = {eps}");
 
             return new Aspect(date, planet1, planet2, (AspectType)aspectType);
         }
