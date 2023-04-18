@@ -32,9 +32,10 @@ namespace TestProject.Tests_Calculator
 
             var jd = TimeCalculator.GetJulDay(date);
             var actual = calc.CalculatePosition(planet, jd, coordinates);
-            var expected = new DMS(7, 25, 20).ToDegrees();
+            var expected_geocentric = new DMS(7, 25, 20).ToDegrees();
+            var expected_topocentric = new DMS(6,35, 50).ToDegrees();
 
-            Assert.That(actual, Is.EqualTo(expected).Within(DegMinute));
+            Assert.That(actual, Is.EqualTo(expected_topocentric).Within(DegMinute));
         }
 
         [Test]
