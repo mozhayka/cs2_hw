@@ -4,7 +4,7 @@ namespace Calculator
 {
     public interface IAspectCalculator
     {
-        public List<Aspect> FindAllAspects(DateTime date, Coordinates coorinates);
-        public List<Aspect> FindAllAspects(double jdFrom, double jdTo, Coordinates coorinates);
+        public List<LunarAspect> FindLunarAspects(DateTime date, Coordinates coordinates, bool septener);
+        public List<LunarAspect> FindLunarAspects(double jdFrom, double jdTo, Coordinates coordinates, bool septener);
     }
 }

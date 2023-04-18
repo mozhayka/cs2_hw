@@ -20,9 +20,9 @@ namespace Calculator
             _LBKCalculator = lbkCalculator;
         }
 
-        public DayInformation Calculate(DateTime day, Coordinates coordinates)
+        public DayInformation Calculate(DateTime day, Coordinates coordinates, bool septener = true)
         {
-            var listOfAspects = _AspectCalculator.FindAllAspects(day, coordinates);
+            var listOfAspects = _AspectCalculator.FindLunarAspects(day, coordinates, septener);
             var lbk = _LBKCalculator.FindAllLBK(day, coordinates);
             return new DayInformation(day, coordinates, listOfAspects, lbk);
         }

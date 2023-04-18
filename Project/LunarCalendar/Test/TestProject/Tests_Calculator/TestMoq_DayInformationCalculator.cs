@@ -41,7 +41,7 @@ namespace TestProject
             calculator.Calculate(date, coordinates);
 
             // Assert
-            mockAspect.Verify(asp => asp.FindAllAspects(date, coordinates));
+            mockAspect.Verify(asp => asp.FindLunarAspects(date, coordinates, true));
             mockLBK.Verify(lbk => lbk.FindAllLBK(date, coordinates));
         }
     }

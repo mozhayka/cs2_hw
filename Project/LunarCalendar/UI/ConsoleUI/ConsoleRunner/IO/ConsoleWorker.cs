@@ -23,7 +23,7 @@ namespace ConsoleUI.ConsoleRunner
 
             sb.AppendLine($"{info.Date}");
             sb.AppendLine($"{info.Coordinates}");
-            sb.AppendLine(PrintAspects(info.Aspects));
+            sb.AppendLine(PrintAspects(info.LunarAspects));
             sb.AppendLine(PrintLBK(info.LBK));
 
             Console.WriteLine(sb.ToString());
@@ -65,7 +65,7 @@ namespace ConsoleUI.ConsoleRunner
             return new Coordinates(latitude, longitude, geoalt);
         }
 
-        private static string PrintAspects(List<Aspect> aspects)
+        private static string PrintAspects(List<LunarAspect> aspects)
         {
             var sb = new StringBuilder();
             foreach (var aspect in aspects)
@@ -75,9 +75,9 @@ namespace ConsoleUI.ConsoleRunner
             return sb.ToString();
         }
 
-        private static string PrintAspect(Aspect aspect)
+        private static string PrintAspect(LunarAspect aspect)
         {
-            return $"{aspect.AstroObject1} {aspect.Type} {aspect.AstroObject2} {aspect.ExactTime}";
+            return $"{AstroObject.Moon} {aspect.Type} {aspect.AstroObject} {aspect.ExactTime}";
         }
 
         private static string PrintLBK(List<LBK> lbk)
