@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using System;
-using System.Text;
+﻿using System.Text;
 using Calculator.Helper;
 using Calculator.SwissEphemeris;
 using Objects;
@@ -14,20 +12,14 @@ namespace Calculator
         public PlanetPositionCalculator()
         {
             // Инициализация SwEph
-            // SwEph.swe_set_ephe_path("C:\\Users\\mozha\\HOMEWORK\\8sem\\CSHARP\\Homework\\Project\\LunarCalendar\\Model\\Calculator\\Helper\\SwissEphemeris\\swedll32.dll");
+            SwEph.swe_set_ephe_path(null);
         }
 
         public double CalculatePosition(AstroObject planet, double jd, Coordinates coordinates)
         {
-            if (CurrentCoordinates == null || CurrentCoordinates != coordinates)
-            {
-                CurrentCoordinates = coordinates;
-                SwEph.swe_set_topo(coordinates.Longitude, coordinates.Latitude, coordinates.Geoalt);
-            }
-
             return planet switch
             {
-                AstroObject.Moon => CalcMoon(jd),
+                AstroObject.Moon => CalcMoon(jd, coordinates),
                 AstroObject.Sun => CalcSun(jd),
                 AstroObject.Mercury => CalcMerc(jd),
                 AstroObject.Venus => CalcVenus(jd),
@@ -41,10 +33,16 @@ namespace Calculator
             };
         }
 
-        private double CalcMoon(double jd)
+        private double CalcMoon(double jd, Coordinates coordinates)
         {
+            if (CurrentCoordinates == null || CurrentCoordinates != coordinates)
+            {
+                CurrentCoordinates = coordinates;
+                SwEph.swe_set_topo(coordinates.Longitude, coordinates.Latitude, coordinates.Geoalt);
+            }
             var moon_xx = new double[6];
             var moon_serr = new StringBuilder(1000);
+            
             SwEph.swe_calc_ut(jd, SwEph.SE_MOON, SEFLG.SEFLG_TOPOCTR, moon_xx, moon_serr);
 
             return moon_xx[0];

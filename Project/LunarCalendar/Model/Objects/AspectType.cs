@@ -34,7 +34,7 @@ namespace Objects
 
         private static bool IsConjunction(double angle, double eps)
         {
-            return Math.Abs(0 - angle) < eps;
+            return Math.Abs(0 - angle) < eps || Math.Abs(360 - angle) < eps;
         }
 
         private static bool IsOpposition(double angle, double eps)

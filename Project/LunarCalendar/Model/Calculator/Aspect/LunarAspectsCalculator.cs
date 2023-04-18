@@ -2,7 +2,7 @@
 
 namespace Calculator
 {
-    public partial class AspectsCalculator : IAspectCalculator
+    public partial class AspectCalculator : IAspectCalculator
     {
         // Находит только первые аспекты луны с планетами
         // Может сломаться, если передать слишком большой промежуток времени
@@ -17,10 +17,10 @@ namespace Calculator
                 if (aspect != null)
                     aspects.Add(aspect);
             }
-            return aspects;
+            return aspects.OrderBy(a => a.ExactTime).ToList();
         }
 
-        private LunarAspect? TryFindOneLunarAspect(AstroObject planet, double jdFrom, double jdTo, Coordinates coordinates, double eps = EpsAngle)
+        private LunarAspect? TryFindOneLunarAspect(AstroObject planet, double jdFrom, double jdTo, Coordinates coordinates, double eps = DegMinute)
         {
             var moon = AstroObject.Moon;
             var startAngle = GetAngle(moon, planet, jdFrom, coordinates);
@@ -32,9 +32,9 @@ namespace Calculator
             var leftJd = jdFrom;
             var rightJd = jdTo;
 
-            while (rightJd - leftJd > EpsJd)
+            while (rightJd - leftJd > Second)
             {
-                var midJd = (jdTo - jdFrom) / 2;
+                var midJd = (leftJd + rightJd) / 2;
                 var midAngle = GetAngle(moon, planet, midJd, coordinates);
                 if (SectorCalc.IsSameSectors(startAngle, midAngle))
                 {

@@ -6,13 +6,13 @@ namespace Calculator
 {
     // The Open-Closed Principle - AspectCalculator реализует поиск аспектов в сутках полным перебором
     // Можно реализовать более умный способ поиска, и тогда придется лишь изменить класс, реализующий интерфейс IAspectCalculator
-    public partial class AspectsCalculator : IAspectCalculator
+    public partial class AspectCalculator : IAspectCalculator
     {
         private readonly IPlanetPositionCalculator calculator;
-        public const double EpsAngle = 1e-3;
-        public const double EpsJd = 1e-3;
+        public const double DegMinute = (double) 1 / 60;
+        public const double Second = (double) 1 / (24 * 60 * 60);
         
-        public AspectsCalculator(IPlanetPositionCalculator calculator)
+        public AspectCalculator(IPlanetPositionCalculator calculator)
         {
             this.calculator = calculator;
         }

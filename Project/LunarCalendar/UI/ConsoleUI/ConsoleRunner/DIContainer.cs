@@ -35,7 +35,7 @@ namespace ConsoleUI.ConsoleRunner
             // Container сам видит, что для сервиса IPlanetPositionCalculator зарегистрирована реализация PlanetPositionCalculator,
             // поэтому при создании объекта AspectsCalculator неявно создает объект PlanetPositionCalculator
             // и передает его в конструктор AspectsCalculator
-            services.AddTransient<IAspectCalculator, AspectsCalculator>();
+            services.AddTransient<IAspectCalculator, AspectCalculator>();
             services.AddTransient<ILBKCalculator, LBKCalculator>();
 
             services.AddTransient<IDayInformationCalculator, DayInformationCalculator>();
