@@ -10,9 +10,37 @@ namespace TestProject.Tests_Calculator
         readonly IPlanetPositionCalculator calc = new PlanetPositionCalculator();
 
         [Test]
-        public void Test1_SeptenerPosition()
+        public void Test_MoonPosition1()
         {
-            var date = new DateTime(2021, 2, 18, 23, 21, 00);
+            var date = new DateTime(2021, 2, 19, 02, 21, 00).AddHours(-3); // Перевод локального времени в UTC
+            var coordinates = InterestingCoordinates.Moscow;
+            var planet = AstroObject.Moon;
+
+            var jd = TimeCalculator.GetJulDay(date);
+            var actual = calc.CalculatePosition(planet, jd, coordinates);
+            var expected = new DMS(51, 46, 27).ToDegrees();
+
+            Assert.That(actual, Is.EqualTo(expected).Within(DegMinute));
+        }
+
+        [Test]
+        public void Test_MoonPosition2()
+        {
+            var date = new DateTime(2023, 04, 18, 13, 42, 00); 
+            var coordinates = InterestingCoordinates.Moscow;
+            var planet = AstroObject.Moon;
+
+            var jd = TimeCalculator.GetJulDay(date);
+            var actual = calc.CalculatePosition(planet, jd, coordinates);
+            var expected = new DMS(7, 25, 20).ToDegrees();
+
+            Assert.That(actual, Is.EqualTo(expected).Within(DegMinute));
+        }
+
+        [Test]
+        public void Test_SeptenerPosition()
+        {
+            var date = new DateTime(2021, 2, 19, 02, 21, 00).AddHours(-3);
             var coordinates = InterestingCoordinates.Moscow;
             var jd = TimeCalculator.GetJulDay(date);
             Console.WriteLine($"UTC time {date}");
@@ -48,34 +76,6 @@ namespace TestProject.Tests_Calculator
                 Assert.That(Jupiter, Is.EqualTo(314.29).Within(DegMinute), "Jupiter");
                 Assert.That(Saturn, Is.EqualTo(307.36).Within(DegMinute), "Saturn");
             });
-        }
-
-        [Test]
-        public void Test1_MoonPosition()
-        {
-            var date = new DateTime(2021, 2, 19, 02, 21, 00);
-            var coordinates = InterestingCoordinates.Moscow;
-            var planet = AstroObject.Moon;
-
-            var jd = TimeCalculator.GetJulDay(date);
-            var actual = calc.CalculatePosition(planet, jd, coordinates);
-            var expected = 52.95;
-
-            Assert.That(actual, Is.EqualTo(expected).Within(DegMinute));
-        }
-
-        [Test]
-        public void Test2_MoonPosition()
-        {
-            var date = new DateTime(2021, 2, 19, 00, 29, 32);
-            var coordinates = InterestingCoordinates.Moscow;
-            var planet = AstroObject.Moon;
-
-            var jd = TimeCalculator.GetJulDay(date);
-            var actual = calc.CalculatePosition(planet, jd, coordinates);
-            var expected = 51.83;
-
-            Assert.That(actual, Is.EqualTo(expected).Within(DegMinute));
         }
     }
 }

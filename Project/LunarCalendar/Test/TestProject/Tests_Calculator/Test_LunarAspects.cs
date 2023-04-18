@@ -16,15 +16,15 @@ namespace TestProject.Tests_Calculator
         [Test]
         public void Test1()
         {
-            var date = new DateTime(2021, 02, 19);
+            var date = new DateTime(2021, 02, 19).AddHours(-3);
             var coordinates = InterestingCoordinates.Moscow;
             var actual = calc.FindLunarAspects(date, coordinates, false);
             var expected = new List<LunarAspect>
             {
-                new LunarAspect(new DateTime(2021, 02, 19, 02, 21, 00), AstroObject.Venus, AspectType.Square),
-                new LunarAspect(new DateTime(2021, 02, 19, 03, 48, 00), AstroObject.Mars, AspectType.Conjunction),
-                new LunarAspect(new DateTime(2021, 02, 19, 10, 28, 00), AstroObject.Pluto, AspectType.Trine),
-                new LunarAspect(new DateTime(2021, 02, 19, 21, 47, 00), AstroObject.Sun, AspectType.Square),
+                new LunarAspect(new DateTime(2021, 02, 19, 02, 21, 00).AddHours(-3), AstroObject.Venus, AspectType.Square),
+                new LunarAspect(new DateTime(2021, 02, 19, 03, 48, 00).AddHours(-3), AstroObject.Mars, AspectType.Conjunction),
+                new LunarAspect(new DateTime(2021, 02, 19, 10, 28, 00).AddHours(-3), AstroObject.Pluto, AspectType.Trine),
+                new LunarAspect(new DateTime(2021, 02, 19, 21, 47, 00).AddHours(-3), AstroObject.Sun, AspectType.Square),
             };
 
             for (int i = 0; i < expected.Count; i++)
