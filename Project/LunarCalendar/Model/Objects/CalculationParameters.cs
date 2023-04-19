@@ -16,7 +16,7 @@ namespace Objects
         public bool Topocentric { get; set; }
         public double EpsDeg { get; set; }
 
-        public CalculationParameters(double jdFrom, double jdTo, Coordinates? coordinates = null, bool septener = true, bool topocentric = false, double eps = DegMinute)
+        public CalculationParameters(double jdFrom, double jdTo, bool septener = true, Coordinates? coordinates = null, bool topocentric = false, double eps = DegMinute)
         {
             JdFrom = jdFrom;
             JdTo = jdTo;
