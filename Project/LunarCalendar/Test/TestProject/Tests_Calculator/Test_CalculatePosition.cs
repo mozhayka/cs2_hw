@@ -10,28 +10,28 @@ namespace TestProject.Tests_Calculator
         readonly IPlanetPositionCalculator calc = new PlanetPositionCalculator();
 
         [Test]
-        public void Test_MoonPosition1()
+        public void Test_MoonPositionGeocentric()
         {
             var date = new DateTime(2021, 2, 19, 02, 21, 00).AddHours(-3); // Перевод локального времени в UTC
             var coordinates = InterestingCoordinates.Moscow;
             var planet = AstroObject.Moon;
 
             var jd = TimeCalculator.GetJulDay(date);
-            var actual = calc.CalculatePosition(planet, jd, coordinates);
+            var actual = calc.CalculatePosition(planet, jd);
             var expected = new DMS(51, 46, 27).ToDegrees();
 
             Assert.That(actual, Is.EqualTo(expected).Within(DegMinute));
         }
 
         [Test]
-        public void Test_MoonPosition2()
+        public void Test_MoonPositionTopocentric()
         {
             var date = new DateTime(2023, 04, 18, 13, 42, 00); 
             var coordinates = InterestingCoordinates.Moscow;
             var planet = AstroObject.Moon;
 
             var jd = TimeCalculator.GetJulDay(date);
-            var actual = calc.CalculatePosition(planet, jd, coordinates);
+            var actual = calc.CalculatePosition(planet, jd, coordinates, true);
             var expected_geocentric = new DMS(7, 25, 20).ToDegrees();
             var expected_topocentric = new DMS(6,35, 50).ToDegrees();
 

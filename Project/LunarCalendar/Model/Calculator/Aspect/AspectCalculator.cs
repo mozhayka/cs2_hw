@@ -9,7 +9,6 @@ namespace Calculator
     public partial class AspectCalculator : IAspectCalculator
     {
         private readonly IPlanetPositionCalculator calculator;
-        public const double DegMinute = (double) 1 / 60;
         public const double Second = (double) 1 / (24 * 60 * 60);
         
         public AspectCalculator(IPlanetPositionCalculator calculator)
@@ -17,21 +16,26 @@ namespace Calculator
             this.calculator = calculator;
         }
 
-        public List<LunarAspect> FindLunarAspects(DateTime date, Coordinates coordinates, bool septener)
+        // Находит только первые аспекты луны с планетами (так как Луна проходит за день примерно 12 градусов, то с одной планетой расстояние между аспектами хотя бы 2 дня)
+        // Может сломаться, если передать слишком большой промежуток времени
+        public List<LunarAspect> FindLunarAspects(CalculationParameters parameters)
         {
-            return FindLunarAspects(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1)), coordinates, septener);
+            var aspects = new List<LunarAspect>();
+            foreach (var planet in parameters.Planets)
+            {
+                if (planet.Equals(AstroObject.Moon))
+                    continue;
+                var aspect = TryFindOneLunarAspect(planet, parameters);
+                if (aspect != null)
+                    aspects.Add(aspect);
+            }
+            return aspects.OrderBy(a => a.ExactTime).ToList();
         }
 
-        public List<LunarAspect> FindLunarAspects(double jdFrom, double jdTo, Coordinates coordinates, bool septener)
+        private double GetAngle(AstroObject planet1, AstroObject planet2, double jdExactTime, Coordinates? coordinates, bool topocentric)
         {
-            var planets = septener ? InterestingPlanets.Septener : InterestingPlanets.All;
-            return FindLunarAspects(jdFrom, jdTo, coordinates, planets);
-        }
-
-        private double GetAngle(AstroObject planet1, AstroObject planet2, double jdExactTime, Coordinates coordinates)
-        {
-            var planet1_Position = calculator.CalculatePosition(planet1, jdExactTime, coordinates);
-            var planet2_Position = calculator.CalculatePosition(planet2, jdExactTime, coordinates);
+            var planet1_Position = calculator.CalculatePosition(planet1, jdExactTime, coordinates, topocentric);
+            var planet2_Position = calculator.CalculatePosition(planet2, jdExactTime, coordinates, topocentric);
 
             if (planet1_Position < planet2_Position)
                 planet1_Position += 360;

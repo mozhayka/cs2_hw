@@ -17,10 +17,10 @@ namespace TestProject
         {
             // Arrange
             var stubLBK = Mock.Of<ILBKCalculator>(
-                lbk => lbk.FindAllLBK(It.IsAny<DateTime>(), It.IsAny<Coordinates>()) == new List<LBK>());
-
+                lbk => lbk.FindAllLBK(It.IsAny<CalculationParameters>()) == new List<LBK>());
+            var parameters = new CalculationParameters(2443356.5, 2443357.5);
             // Act
-            var lbk = stubLBK.FindAllLBK(new DateTime(), new Coordinates(0, 0));
+            var lbk = stubLBK.FindAllLBK(parameters);
 
             // Assert
             Assert.That(lbk, Is.EqualTo(new List<LBK>()));
@@ -34,15 +34,14 @@ namespace TestProject
             var mockLBK = new Mock<ILBKCalculator>();
             var calculator = new DayInformationCalculator(mockAspect.Object, mockLBK.Object);
 
-            var date = new DateTime(2023, 4, 2);
-            var coordinates = new Coordinates(100, 100);
+            var parameters = new CalculationParameters(2443356.5, 2443357.5);
 
             // Act
-            calculator.Calculate(date, coordinates);
+            calculator.Calculate(parameters);
 
             // Assert
-            mockAspect.Verify(asp => asp.FindLunarAspects(date, coordinates, true));
-            mockLBK.Verify(lbk => lbk.FindAllLBK(date, coordinates));
+            mockAspect.Verify(asp => asp.FindLunarAspects(parameters));
+            mockLBK.Verify(lbk => lbk.FindAllLBK(parameters));
         }
     }
 }

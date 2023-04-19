@@ -20,11 +20,11 @@ namespace Calculator
             _LBKCalculator = lbkCalculator;
         }
 
-        public DayInformation Calculate(DateTime day, Coordinates coordinates, bool septener = true)
+        public DayInformation Calculate(CalculationParameters parameters)
         {
-            var listOfAspects = _AspectCalculator.FindLunarAspects(day, coordinates, septener);
-            var lbk = _LBKCalculator.FindAllLBK(day, coordinates);
-            return new DayInformation(day, coordinates, listOfAspects, lbk);
+            var listOfAspects = _AspectCalculator.FindLunarAspects(parameters);
+            var lbk = _LBKCalculator.FindAllLBK(parameters);
+            return new DayInformation(TimeCalculator.FromJulDay(parameters.JdFrom), parameters.Coordinates, listOfAspects, lbk);
         }
     }
 }

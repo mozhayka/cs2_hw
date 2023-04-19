@@ -12,7 +12,7 @@ namespace Calculator
             this.calculator = calculator;
         }
 
-        public List<LBK> FindAllLBK(DateTime day, Coordinates coordinates)
+        public List<LBK> FindAllLBK(CalculationParameters parameters)
         {
             throw new NotImplementedException();
         }

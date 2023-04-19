@@ -4,55 +4,35 @@ namespace Calculator
 {
     public partial class AspectCalculator : IAspectCalculator
     {
-        // Находит только первые аспекты луны с планетами
-        // Может сломаться, если передать слишком большой промежуток времени
-        public List<LunarAspect> FindLunarAspects(double jdFrom, double jdTo, Coordinates coordinates, AstroObject[] planets)
-        {
-            var aspects = new List<LunarAspect>();
-            foreach (var planet in planets)
-            {
-                if (planet.Equals(AstroObject.Moon))
-                    continue;
-                var aspect = TryFindOneLunarAspect(planet, jdFrom, jdTo, coordinates);
-                if (aspect != null)
-                    aspects.Add(aspect);
-            }
-            return aspects.OrderBy(a => a.ExactTime).ToList();
-        }
-
-        private LunarAspect? TryFindOneLunarAspect(AstroObject planet, double jdFrom, double jdTo, Coordinates coordinates, double eps = DegMinute)
+        private LunarAspect? TryFindOneLunarAspect(AstroObject planet, CalculationParameters parameters)
         {
             var moon = AstroObject.Moon;
-            var startAngle = GetAngle(moon, planet, jdFrom, coordinates);
-            var endAngle = GetAngle(moon, planet, jdTo, coordinates);
+            var startAngle = GetAngle(moon, planet, parameters.JdFrom, parameters.Coordinates, parameters.Topocentric);
+            var endAngle = GetAngle(moon, planet, parameters.JdTo, parameters.Coordinates, parameters.Topocentric);
 
             if (SectorCalc.IsSameAspectSectors(startAngle, endAngle))
                 return null;
 
-            var leftJd = jdFrom;
-            var rightJd = jdTo;
+            var leftJd = parameters.JdFrom;
+            var rightJd = parameters.JdTo;
 
             while (rightJd - leftJd > Second)
             {
                 var midJd = (leftJd + rightJd) / 2;
-                var midAngle = GetAngle(moon, planet, midJd, coordinates);
+                var midAngle = GetAngle(moon, planet, midJd, parameters.Coordinates, parameters.Topocentric);
                 if (SectorCalc.IsSameSectors(startAngle, midAngle))
-                {
                     leftJd = midJd;
-                }
                 else
-                {
                     rightJd = midJd;
-                }
             }
 
             var date = TimeCalculator.FromJulDay(leftJd);
-            var angle = GetAngle(moon, planet, leftJd, coordinates);
-            var aspectType = AspectTypeCalc.GetAspectType(angle, eps);
+            var angle = GetAngle(moon, planet, leftJd, parameters.Coordinates, parameters.Topocentric);
+            var aspectType = AspectTypeCalc.GetAspectType(angle, parameters.EpsDeg);
 
             if (aspectType == null)
                 throw new Exception($"Coludn't recognize aspect type\n" +
-                    $"angle = {angle}, eps = {eps}");
+                    $"angle = {angle}, eps = {parameters.EpsDeg}");
 
             return new LunarAspect(date, planet, (AspectType)aspectType);
         }

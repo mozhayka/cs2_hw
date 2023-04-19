@@ -21,7 +21,7 @@ namespace ConsoleUI.ConsoleRunner
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine($"{info.Date}");
+            sb.AppendLine($"{info.DateUTC}");
             sb.AppendLine($"{info.Coordinates}");
             sb.AppendLine(PrintAspects(info.LunarAspects));
             sb.AppendLine(PrintLBK(info.LBK));

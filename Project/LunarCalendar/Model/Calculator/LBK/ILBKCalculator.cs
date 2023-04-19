@@ -4,6 +4,6 @@ namespace Calculator
 {
     public interface ILBKCalculator
     {
-        public List<LBK> FindAllLBK(DateTime day, Coordinates coordinates);
+        public List<LBK> FindAllLBK(CalculationParameters parameters);
     }
 }

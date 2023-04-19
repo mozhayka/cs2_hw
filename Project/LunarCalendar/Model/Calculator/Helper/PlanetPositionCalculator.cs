@@ -7,19 +7,17 @@ namespace Calculator
 {
     public class PlanetPositionCalculator : IPlanetPositionCalculator
     {
-        public Coordinates? CurrentCoordinates { get; set; }
-
         public PlanetPositionCalculator()
         {
             // Инициализация SwEph
             SwEph.swe_set_ephe_path(null);
         }
 
-        public double CalculatePosition(AstroObject planet, double jd, Coordinates coordinates)
+        public double CalculatePosition(AstroObject planet, double jd, Coordinates? coordinates = null, bool topocentric = false)
         {
             return planet switch
             {
-                AstroObject.Moon => CalcMoon(jd, coordinates),
+                AstroObject.Moon => CalcMoon(jd, coordinates, topocentric),
                 AstroObject.Sun => CalcSun(jd),
                 AstroObject.Mercury => CalcMerc(jd),
                 AstroObject.Venus => CalcVenus(jd),
@@ -33,18 +31,22 @@ namespace Calculator
             };
         }
 
-        private double CalcMoon(double jd, Coordinates coordinates)
+        private double CalcMoon(double jd, Coordinates? coordinates, bool topocentric)
         {
-            if (CurrentCoordinates == null || CurrentCoordinates != coordinates)
-            {
-                CurrentCoordinates = coordinates;
-                SwEph.swe_set_topo(coordinates.Longitude, coordinates.Latitude, coordinates.Geoalt);
-            }
             var moon_xx = new double[6];
             var moon_serr = new StringBuilder(1000);
-            
-            SwEph.swe_calc_ut(jd, SwEph.SE_MOON, SEFLG.SEFLG_TOPOCTR, moon_xx, moon_serr);
 
+            if (topocentric == false)
+            {
+                SwEph.swe_calc_ut(jd, SwEph.SE_MOON, 0, moon_xx, moon_serr);
+                return moon_xx[0];
+            }
+
+            if (coordinates == null)
+                throw new Exception("Requested topocentric moon position without coordinates");
+
+            SwEph.swe_set_topo(coordinates.Longitude, coordinates.Latitude, coordinates.Geoalt);
+            SwEph.swe_calc_ut(jd, SwEph.SE_MOON, SEFLG.SEFLG_TOPOCTR, moon_xx, moon_serr);
             return moon_xx[0];
         }
 

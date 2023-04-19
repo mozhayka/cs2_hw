@@ -2,7 +2,7 @@
 
 namespace Calculator
 {
-    internal class TimeCalculator
+    public class TimeCalculator
     {
         public static double GetJulDay(DateTime utcDate)
         {
