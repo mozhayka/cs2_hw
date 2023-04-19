@@ -1,4 +1,6 @@
-﻿using Calculator.SwissEphemeris;
+﻿using System.Numerics;
+using Calculator.SwissEphemeris;
+using Objects;
 
 namespace Calculator
 {

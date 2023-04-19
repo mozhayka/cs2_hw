@@ -16,7 +16,7 @@ namespace Calculator
             var leftJd = parameters.JdFrom;
             var rightJd = parameters.JdTo;
 
-            while (rightJd - leftJd > Second)
+            while (rightJd - leftJd > SecondJd)
             {
                 var midJd = (leftJd + rightJd) / 2;
                 var midAngle = GetAngle(moon, planet, midJd, parameters.Coordinates, parameters.Topocentric);

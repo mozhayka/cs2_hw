@@ -9,7 +9,7 @@ namespace Calculator
     public partial class AspectCalculator : IAspectCalculator
     {
         private readonly IPlanetPositionCalculator calculator;
-        public const double Second = (double) 1 / (24 * 60 * 60);
+        public const double SecondJd = (double) 1 / (24 * 60 * 60);
         
         public AspectCalculator(IPlanetPositionCalculator calculator)
         {
