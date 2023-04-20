@@ -20,7 +20,7 @@ namespace LunarCalendarVM
             {
                 return LoadFromDB();
             }
-            var parameters = new CalculationParameters(TimeCalculator.GetJulDay(Date), TimeCalculator.GetJulDay(Date.AddDays(1)));
+            var parameters = new CalculationParameters(Date);
             var dayInfo = Calculator.Calculate(parameters);
             SaveToDB(dayInfo);
             return dayInfo;

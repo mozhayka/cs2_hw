@@ -1,18 +1,34 @@
-﻿namespace Objects
+﻿using Objects.Enums;
+
+namespace Objects
 {
     public class DayInformation
     {
-        public DateTime DateUTC { get; set; }
-        public Coordinates? Coordinates { get; set; }
-        public List<LunarAspect> LunarAspects { get; set; }
-        public List<LBK> LBK { get; set; }
-
-        public DayInformation(DateTime date, Coordinates? coordinates, List<LunarAspect> lunarAspects, List<LBK> lBK)
+        public CalculationParameters Input { get; set; }
+        public class LunarInformation
         {
-            DateUTC = date;
-            Coordinates = coordinates;
+            public DateTime? LunarIngression { get; set; }
+
+            public Zodiac StartSign { get; set; }
+            public Zodiac EndSign { get; set; }
+
+            public LunarPhase StartPhase { get; set; }
+            public LunarPhase EndPhase { get; set; }
+        }
+
+        public LunarInformation LunarPosition { get; set; }
+        public List<LunarAspect> LunarAspects { get; set; }
+
+        public List<LBK> LBKSeptener { get; set; }
+        public List<LBK> LBKAll { get; set; }
+
+        public DayInformation(CalculationParameters input, LunarInformation lunarPosition, List<LunarAspect> lunarAspects, List<LBK> lbkSeptener, List<LBK> lbkAll)
+        {
+            Input = input;
+            LunarPosition = lunarPosition;
             LunarAspects = lunarAspects;
-            LBK = lBK;
+            LBKSeptener = lbkSeptener;
+            LBKAll = lbkAll;
         }
     }
 }

@@ -4,13 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Calculator;
+using Calculator.Helper;
+using LunarCalendarVM;
+using Microsoft.Extensions.DependencyInjection;
 using Objects;
 
 namespace TestProject.Tests_Calculator
 {
     internal class Test_NextLunarSignTime
     {
-        readonly ILBKCalculator calc = new LBKCalculator(new PlanetPositionCalculator(), new AspectCalculator(new PlanetPositionCalculator()));
+        ILunarPositionCalculator calc;
+
+        [SetUp]
+        public void Setup()
+        {
+            var services = new ServiceCollection();
+
+            services.AddTransient<IPlanetPositionCalculator, PlanetPositionCalculator>();
+
+            services.AddTransient<IAspectCalculator, AspectCalculator>();
+            services.AddTransient<ILunarPositionCalculator, LunarPositionCalculator>();
+
+            services.AddTransient<ILBKCalculator, LBKCalculator>();
+
+            services.AddTransient<IDayInformationCalculator, DayInformationCalculator>();
+
+            var provider = services.BuildServiceProvider();
+            calc = provider.GetRequiredService<ILunarPositionCalculator>();
+        }
 
         [Test]
         public void Test1()

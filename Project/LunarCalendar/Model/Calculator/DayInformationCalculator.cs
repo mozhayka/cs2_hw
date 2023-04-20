@@ -9,22 +9,23 @@ namespace Calculator
         // Dependency Inversion Principle - связываемся с AspectsCalculator через интерфейс
         private readonly IAspectCalculator _AspectCalculator;
         private readonly ILBKCalculator _LBKCalculator;
+        private readonly ILunarPositionCalculator _LunarCalculator;
 
-/*        public DayInformationCalculator()
-            : this(new AspectsCalculator(), new LBKCalculator())
-        { }*/
-
-        public DayInformationCalculator(IAspectCalculator aspectCalculator, ILBKCalculator lbkCalculator)
+        public DayInformationCalculator(IAspectCalculator aspectCalculator, ILBKCalculator lbkCalculator, ILunarPositionCalculator lunarCalculator)
         {
             _AspectCalculator = aspectCalculator;
             _LBKCalculator = lbkCalculator;
+            _LunarCalculator = lunarCalculator;
         }
 
         public DayInformation Calculate(CalculationParameters parameters)
         {
             var listOfAspects = _AspectCalculator.FindLunarAspects(parameters);
-            var lbk = _LBKCalculator.FindAllLBK(parameters);
-            return new DayInformation(TimeCalculator.FromJulDay(parameters.JdFrom), parameters.Coordinates, listOfAspects, lbk);
+            var lunarPosition = _LunarCalculator.LunarInformation(parameters);
+            var lbkSeptener = _LBKCalculator.FindAllLBK(parameters, true);
+            var lbkAll = _LBKCalculator.FindAllLBK(parameters, false);
+
+            return new DayInformation(parameters, lunarPosition, listOfAspects, lbkSeptener, lbkAll);
         }
     }
 }

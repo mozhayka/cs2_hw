@@ -1,18 +1,39 @@
 ﻿using Calculator;
+using Calculator.Helper;
+using LunarCalendarVM;
+using Microsoft.Extensions.DependencyInjection;
 using Objects;
 
 namespace TestProject.Tests_Calculator
 {
     internal class Test_LunarAspects
     {
-        readonly IAspectCalculator calc = new AspectCalculator(new PlanetPositionCalculator());
+        IAspectCalculator calc;
+
+        [SetUp]
+        public void Setup()
+        {
+            var services = new ServiceCollection();
+
+            services.AddTransient<IPlanetPositionCalculator, PlanetPositionCalculator>();
+
+            services.AddTransient<IAspectCalculator, AspectCalculator>();
+            services.AddTransient<ILunarPositionCalculator, LunarPositionCalculator>();
+
+            services.AddTransient<ILBKCalculator, LBKCalculator>();
+
+            services.AddTransient<IDayInformationCalculator, DayInformationCalculator>();
+
+            var provider = services.BuildServiceProvider();
+            calc = provider.GetRequiredService<IAspectCalculator>();
+        }
 
         [Test]
         public void Test1()
         {
             var date = new DateTime(2021, 02, 19).AddHours(-3);
             // var coordinates = InterestingCoordinates.Moscow;
-            var parameters = new CalculationParameters(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1)), false);
+            var parameters = new CalculationParameters(date);
             var actual = calc.FindLunarAspects(parameters);
             var expected = new List<LunarAspect>
             {
@@ -30,8 +51,8 @@ namespace TestProject.Tests_Calculator
         {
             var date = new DateTime(2021, 02, 19).AddHours(-3);
             // var coordinates = InterestingCoordinates.Moscow;
-            var parameters = new CalculationParameters(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1)), true);
-            var actual = calc.FindLunarAspects(parameters);
+            var parameters = new CalculationParameters(date);
+            var actual = calc.FindLunarAspects(parameters, InterestingPlanets.Septener);
             var expected = new List<LunarAspect>
             {
                 new LunarAspect(new DateTime(2021, 02, 19, 02, 21, 00).AddHours(-3), AstroObject.Venus, AspectType.Square, Zodiac.Taurus, Zodiac.Aquarius, new DMS(22, 0, 0)),
@@ -47,7 +68,7 @@ namespace TestProject.Tests_Calculator
         {
             var date = new DateTime(2020, 05, 13).AddHours(-3);
             // var coordinates = InterestingCoordinates.Moscow;
-            var parameters = new CalculationParameters(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1)), false);
+            var parameters = new CalculationParameters(date);
             var actual = calc.FindLunarAspects(parameters);
             var expected = new List<LunarAspect>
             {
@@ -62,7 +83,7 @@ namespace TestProject.Tests_Calculator
         {
             var date = new DateTime(2020, 01, 13).AddHours(-3);
             // var coordinates = InterestingCoordinates.Moscow;
-            var parameters = new CalculationParameters(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1)), false);
+            var parameters = new CalculationParameters(date);
             var actual = calc.FindLunarAspects(parameters);
             var expected = new List<LunarAspect>
             {
@@ -78,8 +99,8 @@ namespace TestProject.Tests_Calculator
         {
             var date = new DateTime(2020, 01, 13).AddHours(-3);
             // var coordinates = InterestingCoordinates.Moscow;
-            var parameters = new CalculationParameters(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1)));
-            var actual = calc.FindLunarAspects(parameters);
+            var parameters = new CalculationParameters(date);
+            var actual = calc.FindLunarAspects(parameters, InterestingPlanets.Septener);
             var expected = new List<LunarAspect>
             {
                 new LunarAspect(new DateTime(2020, 01, 13, 16, 41, 00).AddHours(-3), AstroObject.Venus, AspectType.Opposition, Zodiac.Leo, Zodiac.Aquarius, new DMS(30, 0, 0)),
@@ -92,6 +113,7 @@ namespace TestProject.Tests_Calculator
         {
             Assert.Multiple(() =>
             {
+                Assert.That(actual, Has.Count.EqualTo(expected.Count));
                 for (int i = 0; i < expected.Count; i++)
                 {
                     Assert.That(actual[i].AstroObject, Is.EqualTo(expected[i].AstroObject));

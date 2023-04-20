@@ -36,6 +36,8 @@ namespace ConsoleUI.ConsoleRunner
             // поэтому при создании объекта AspectsCalculator неявно создает объект PlanetPositionCalculator
             // и передает его в конструктор AspectsCalculator
             services.AddTransient<IAspectCalculator, AspectCalculator>();
+            services.AddTransient<ILunarPositionCalculator, LunarPositionCalculator>();
+
             services.AddTransient<ILBKCalculator, LBKCalculator>();
 
             services.AddTransient<IDayInformationCalculator, DayInformationCalculator>();

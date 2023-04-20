@@ -1,4 +1,5 @@
 ﻿using Calculator;
+using LunarCalendarVM;
 using Moq;
 using NUnit.Framework.Internal;
 using Objects;
@@ -17,10 +18,10 @@ namespace TestProject
         {
             // Arrange
             var stubLBK = Mock.Of<ILBKCalculator>(
-                lbk => lbk.FindAllLBK(It.IsAny<CalculationParameters>()) == new List<LBK>());
-            var parameters = new CalculationParameters(2443356.5, 2443357.5);
+                lbk => lbk.FindAllLBK(It.IsAny<CalculationParameters>(), It.IsAny<bool>()) == new List<LBK>());
+            var parameters = new CalculationParameters(new DateTime(2023, 04, 20));
             // Act
-            var lbk = stubLBK.FindAllLBK(parameters);
+            var lbk = stubLBK.FindAllLBK(parameters, true);
 
             // Assert
             Assert.That(lbk, Is.EqualTo(new List<LBK>()));
@@ -32,16 +33,17 @@ namespace TestProject
             // Arrange
             var mockAspect = new Mock<IAspectCalculator>();
             var mockLBK = new Mock<ILBKCalculator>();
-            var calculator = new DayInformationCalculator(mockAspect.Object, mockLBK.Object);
+            var lunarLBK = new Mock<ILunarPositionCalculator>();
+            var calculator = new DayInformationCalculator(mockAspect.Object, mockLBK.Object, lunarLBK.Object);
 
-            var parameters = new CalculationParameters(2443356.5, 2443357.5);
+            var parameters = new CalculationParameters(new DateTime(2023, 04, 20));
 
             // Act
             calculator.Calculate(parameters);
 
             // Assert
             mockAspect.Verify(asp => asp.FindLunarAspects(parameters));
-            mockLBK.Verify(lbk => lbk.FindAllLBK(parameters));
+            mockLBK.Verify(lbk => lbk.FindAllLBK(parameters, true));
         }
     }
 }

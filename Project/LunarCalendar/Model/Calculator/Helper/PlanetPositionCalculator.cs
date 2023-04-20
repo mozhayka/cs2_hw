@@ -13,11 +13,11 @@ namespace Calculator
             SwEph.swe_set_ephe_path(null);
         }
 
-        public double CalculatePosition(AstroObject planet, double jd, Coordinates? coordinates = null, bool topocentric = false)
+        public double CalculatePosition(AstroObject planet, double jd, Coordinates? coordinates = null)
         {
             return planet switch
             {
-                AstroObject.Moon => CalcMoon(jd, coordinates, topocentric),
+                AstroObject.Moon => CalcMoon(jd, coordinates),
                 AstroObject.Sun => CalcSun(jd),
                 AstroObject.Mercury => CalcMerc(jd),
                 AstroObject.Venus => CalcVenus(jd),
@@ -31,19 +31,27 @@ namespace Calculator
             };
         }
 
-        private double CalcMoon(double jd, Coordinates? coordinates, bool topocentric)
+        public double GetAngle(AstroObject planet1, AstroObject planet2, double jdExactTime, Coordinates? coordinates)
+        {
+            var planet1_Position = CalculatePosition(planet1, jdExactTime, coordinates);
+            var planet2_Position = CalculatePosition(planet2, jdExactTime, coordinates);
+
+            if (planet1_Position < planet2_Position)
+                planet1_Position += 360;
+
+            return planet1_Position - planet2_Position;
+        }
+
+        private double CalcMoon(double jd, Coordinates? coordinates)
         {
             var moon_xx = new double[6];
             var moon_serr = new StringBuilder(1000);
 
-            if (topocentric == false)
+            if (coordinates == null)
             {
                 SwEph.swe_calc_ut(jd, SwEph.SE_MOON, 0, moon_xx, moon_serr);
                 return moon_xx[0];
             }
-
-            if (coordinates == null)
-                throw new Exception("Requested topocentric moon position without coordinates");
 
             SwEph.swe_set_topo(coordinates.Longitude, coordinates.Latitude, coordinates.Geoalt);
             SwEph.swe_calc_ut(jd, SwEph.SE_MOON, SEFLG.SEFLG_TOPOCTR, moon_xx, moon_serr);

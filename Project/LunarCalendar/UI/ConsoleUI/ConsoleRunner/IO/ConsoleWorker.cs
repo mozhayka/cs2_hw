@@ -21,10 +21,10 @@ namespace ConsoleUI.ConsoleRunner
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine($"{info.DateUTC}");
-            sb.AppendLine($"{info.Coordinates}");
+            sb.AppendLine($"{info.Input.DateUTC}");
+            sb.AppendLine($"{info.Input.Coordinates}");
             sb.AppendLine(PrintAspects(info.LunarAspects));
-            sb.AppendLine(PrintLBK(info.LBK));
+            sb.AppendLine(PrintLBK(info.LBKSeptener));
 
             Console.WriteLine(sb.ToString());
         }
