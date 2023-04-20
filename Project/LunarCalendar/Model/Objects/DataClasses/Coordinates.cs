@@ -34,6 +34,10 @@
             Minutes = minutes;
             Seconds = seconds;
         }
+        public int RoundToDegrees()
+        {
+            return Degrees + (Minutes + Seconds > 0 ? 1 : 0);
+        }
 
         public double ToDegrees()
         {

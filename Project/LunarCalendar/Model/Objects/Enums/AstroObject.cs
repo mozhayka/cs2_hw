@@ -4,8 +4,8 @@ namespace Objects
 {
     public enum AstroObject
     {
-        Sun,
         Moon,
+        Sun,
         Mercury,
         Venus,
         Mars,
@@ -20,8 +20,8 @@ namespace Objects
     {
         public static readonly AstroObject[] All = (AstroObject[])Enum.GetValues(typeof(AstroObject));
         public static readonly AstroObject[] Septener = new AstroObject[] {
-            AstroObject.Sun,
             AstroObject.Moon,
+            AstroObject.Sun,
             AstroObject.Mercury,
             AstroObject.Venus,
             AstroObject.Mars,

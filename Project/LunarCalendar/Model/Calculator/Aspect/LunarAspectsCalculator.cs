@@ -1,4 +1,5 @@
-﻿using Objects;
+﻿using System.Numerics;
+using Objects;
 
 namespace Calculator
 {
@@ -34,7 +35,12 @@ namespace Calculator
                 throw new Exception($"Coludn't recognize aspect type\n" +
                     $"angle = {angle}, eps = {parameters.EpsDeg}");
 
-            return new LunarAspect(date, planet, (AspectType)aspectType);
+            var moonPosition = calculator.CalculatePosition(moon, leftJd, parameters.Coordinates, parameters.Topocentric);
+            var planetPosition = calculator.CalculatePosition(planet, leftJd, parameters.Coordinates, parameters.Topocentric);
+
+            var moonZodiac = ZodiacCalc.FromAngle(moonPosition);
+            var planetZodiac = ZodiacCalc.FromAngle(planetPosition);
+            return new LunarAspect(date, planet, (AspectType)aspectType, moonZodiac, planetZodiac, DMS.FromDegrees(moonPosition));
         }
     }
 }

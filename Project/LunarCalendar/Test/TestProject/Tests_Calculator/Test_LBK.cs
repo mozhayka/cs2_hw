@@ -56,6 +56,36 @@ namespace TestProject.Tests_Calculator
             CompareLBK(actual, expected);
         }
 
+        [Test]
+        public void Test4()
+        {
+            var date = new DateTime(2020, 01, 13).AddHours(-3);
+            var parameters = new CalculationParameters(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1)), true);
+
+            var actual = calc.FindAllLBK(parameters);
+            var expected = new List<LBK>
+            {
+                new LBK(new DateTime(2020, 01, 13, 16, 42, 00).AddHours(-3), new DateTime(2020, 01, 13, 17, 06, 00).AddHours(-3)),
+            };
+
+            CompareLBK(actual, expected);
+        }
+
+        [Test]
+        public void Test5()
+        {
+            var date = new DateTime(2020, 01, 13).AddHours(-3);
+            var parameters = new CalculationParameters(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1)), false);
+
+            var actual = calc.FindAllLBK(parameters);
+            var expected = new List<LBK>
+            {
+                new LBK(new DateTime(2020, 01, 13, 16, 42, 00).AddHours(-3), new DateTime(2020, 01, 13, 17, 06, 00).AddHours(-3)),
+            };
+
+            CompareLBK(actual, expected);
+        }
+
         private void CompareLBK(List<LBK> actual, List<LBK> expected)
         {
             Assert.Multiple(() =>
