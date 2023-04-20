@@ -28,6 +28,23 @@ namespace TestProject.Tests_Calculator
         [Test]
         public void Test2()
         {
+            var date = new DateTime(2021, 02, 19).AddHours(-3);
+            // var coordinates = InterestingCoordinates.Moscow;
+            var parameters = new CalculationParameters(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1)), true);
+            var actual = calc.FindLunarAspects(parameters);
+            var expected = new List<LunarAspect>
+            {
+                new LunarAspect(new DateTime(2021, 02, 19, 02, 21, 00).AddHours(-3), AstroObject.Venus, AspectType.Square),
+                new LunarAspect(new DateTime(2021, 02, 19, 03, 48, 00).AddHours(-3), AstroObject.Mars, AspectType.Conjunction),
+                new LunarAspect(new DateTime(2021, 02, 19, 21, 47, 00).AddHours(-3), AstroObject.Sun, AspectType.Square),
+            };
+
+            CompareLunarAspects(actual, expected);
+        }
+
+        [Test]
+        public void Test3()
+        {
             var date = new DateTime(2020, 05, 13).AddHours(-3);
             // var coordinates = InterestingCoordinates.Moscow;
             var parameters = new CalculationParameters(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1)), false);
@@ -41,16 +58,31 @@ namespace TestProject.Tests_Calculator
         }
 
         [Test]
-        public void Test3()
+        public void Test4()
         {
             var date = new DateTime(2020, 01, 13).AddHours(-3);
             // var coordinates = InterestingCoordinates.Moscow;
-            var parameters = new CalculationParameters(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1))); //, false);
+            var parameters = new CalculationParameters(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1)), false);
             var actual = calc.FindLunarAspects(parameters);
             var expected = new List<LunarAspect>
             {
                 new LunarAspect(new DateTime(2020, 01, 13, 16, 41, 00).AddHours(-3), AstroObject.Venus, AspectType.Opposition),
-                // new LunarAspect(new DateTime(2020, 01, 13, 21, 29, 00).AddHours(-3), AstroObject.Uranus, AspectType.Trine),
+                new LunarAspect(new DateTime(2020, 01, 13, 21, 29, 00).AddHours(-3), AstroObject.Uranus, AspectType.Trine),
+            };
+
+            CompareLunarAspects(actual, expected);
+        }
+
+        [Test]
+        public void Test5()
+        {
+            var date = new DateTime(2020, 01, 13).AddHours(-3);
+            // var coordinates = InterestingCoordinates.Moscow;
+            var parameters = new CalculationParameters(TimeCalculator.GetJulDay(date), TimeCalculator.GetJulDay(date.AddDays(1)));
+            var actual = calc.FindLunarAspects(parameters);
+            var expected = new List<LunarAspect>
+            {
+                new LunarAspect(new DateTime(2020, 01, 13, 16, 41, 00).AddHours(-3), AstroObject.Venus, AspectType.Opposition),
             };
 
             CompareLunarAspects(actual, expected);

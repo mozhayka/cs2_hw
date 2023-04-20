@@ -25,5 +25,15 @@ namespace Objects
             Topocentric = topocentric;
             EpsDeg = eps;
         }
+
+        public CalculationParameters(double jdFrom, double jdTo, CalculationParameters parameters)
+        {
+            JdFrom = jdFrom;
+            JdTo = jdTo;
+            Coordinates = parameters.Coordinates;
+            Planets = parameters.Planets;
+            Topocentric = parameters.Topocentric;
+            EpsDeg = parameters.EpsDeg;
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace TestProject.Tests_Calculator
 {
     internal class Test_NextLunarSignTime
     {
-        readonly ILBKCalculator calc = new LBKCalculator(new PlanetPositionCalculator());
+        readonly ILBKCalculator calc = new LBKCalculator(new PlanetPositionCalculator(), new AspectCalculator(new PlanetPositionCalculator()));
 
         [Test]
         public void Test1()
