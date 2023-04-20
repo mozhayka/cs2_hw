@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Calculator.Helper;
 using Objects;
-using Objects.Enums;
 
 namespace Calculator
 {
@@ -39,11 +38,11 @@ namespace Calculator
             return rightJd;
         }
 
-        public DayInformation.LunarInformation LunarInformation(CalculationParameters parameters)
+        public LunarInformation LunarInformation(CalculationParameters parameters)
         {
             var jdFrom = TimeCalculator.GetJulDay(parameters.DateUTC);
             var jdTo = TimeCalculator.GetJulDay(parameters.DateUTC.AddDays(1));
-            return new DayInformation.LunarInformation
+            return new LunarInformation()
             {
                 LunarIngression = LunarIngression(jdFrom, jdTo, parameters.Coordinates),
 

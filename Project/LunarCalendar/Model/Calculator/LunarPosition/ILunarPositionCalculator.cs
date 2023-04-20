@@ -9,7 +9,7 @@ namespace Calculator
 {
     public interface ILunarPositionCalculator
     {
-        public DayInformation.LunarInformation LunarInformation(CalculationParameters parameters);
+        public LunarInformation LunarInformation(CalculationParameters parameters);
         public double NextLunarSignTime(double jd, Coordinates? coordinates = null);
     }
 }

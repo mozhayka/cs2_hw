@@ -9,7 +9,7 @@ using LunarCalendarVM;
 using Microsoft.Extensions.DependencyInjection;
 using Objects;
 
-namespace TestProject.Tests_Calculator
+namespace TestProject.Tests_Calculator.Advanced
 {
     internal class Test_NextLunarSignTime
     {

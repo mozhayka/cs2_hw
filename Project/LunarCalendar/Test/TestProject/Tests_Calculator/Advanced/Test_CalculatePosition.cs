@@ -4,7 +4,7 @@ using LunarCalendarVM;
 using Microsoft.Extensions.DependencyInjection;
 using Objects;
 
-namespace TestProject.Tests_Calculator
+namespace TestProject.Tests_Calculator.Advanced
 {
     internal class Test_CalculatePosition
     {
@@ -36,14 +36,14 @@ namespace TestProject.Tests_Calculator
         [Test]
         public void Test_MoonPositionTopocentric()
         {
-            var date = new DateTime(2023, 04, 18, 13, 42, 00); 
+            var date = new DateTime(2023, 04, 18, 13, 42, 00);
             var coordinates = InterestingCoordinates.Moscow;
             var planet = AstroObject.Moon;
 
             var jd = TimeCalculator.GetJulDay(date);
             var actual = calc.CalculatePosition(planet, jd, coordinates);
             var expected_geocentric = new DMS(7, 25, 20).ToDegrees();
-            var expected_topocentric = new DMS(6,35, 50).ToDegrees();
+            var expected_topocentric = new DMS(6, 35, 50).ToDegrees();
 
             Assert.That(actual, Is.EqualTo(expected_topocentric).Within(Const.DegMinute));
         }
@@ -61,19 +61,19 @@ namespace TestProject.Tests_Calculator
 
             var Sun = calc.CalculatePosition(AstroObject.Sun, jd);
             Console.WriteLine($"Sun coordinates: {DMS.FromDegrees(Sun)}");
-            
+
             var Mercury = calc.CalculatePosition(AstroObject.Mercury, jd);
             Console.WriteLine($"Mercury coordinates: {DMS.FromDegrees(Mercury)}");
-            
+
             var Venus = calc.CalculatePosition(AstroObject.Venus, jd);
             Console.WriteLine($"Venus coordinates: {DMS.FromDegrees(Venus)}");
-            
+
             var Mars = calc.CalculatePosition(AstroObject.Mars, jd);
             Console.WriteLine($"Mars coordinates: {DMS.FromDegrees(Mars)}");
-            
+
             var Jupiter = calc.CalculatePosition(AstroObject.Jupiter, jd);
             Console.WriteLine($"Jupiter coordinates: {DMS.FromDegrees(Jupiter)}");
-            
+
             var Saturn = calc.CalculatePosition(AstroObject.Saturn, jd);
             Console.WriteLine($"Saturn coordinates: {DMS.FromDegrees(Saturn)}");
 
