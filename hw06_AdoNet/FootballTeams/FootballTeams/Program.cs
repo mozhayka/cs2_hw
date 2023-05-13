@@ -6,4 +6,5 @@ DBHelper db = new(ConfigurationManager.ConnectionStrings["DefaultConnection"].Co
 // db.AddTeam(SomeTeams.Team1);
 // db.AddStadium(SomeStadiums.Stadium1);
 // Console.WriteLine(db.GetTeamId(SomeTeams.Team1));
-db.AddPlayer(SomePlayers.Player1);
+// db.AddPlayer(SomePlayers.Player1);
+db.DeletePlayer(SomePlayers.Player1.FirstName);
