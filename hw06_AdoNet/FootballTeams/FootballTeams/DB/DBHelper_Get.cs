@@ -17,8 +17,9 @@ namespace FootballTeams
             {
                 Connection = connection,
 
-                CommandText = $"SELECT TeamID FROM Team WHERE Name = {team.Name}"
+                CommandText = $"SELECT TeamID FROM Team WHERE TeamName = '{team.Name}'"
             };
+
             int addressID = int.Parse(command.ExecuteScalar().ToString());
             return addressID;
         }

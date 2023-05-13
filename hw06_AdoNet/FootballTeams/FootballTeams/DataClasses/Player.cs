@@ -37,7 +37,7 @@ namespace FootballTeams
             {
                 Country = "Ru",
                 City = "SPb",
-                Street = "s1",
+                Street = "str1",
                 Building = 3,
                 Apartment = 4,
             },
