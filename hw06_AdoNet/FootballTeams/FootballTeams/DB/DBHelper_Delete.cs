@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace FootballTeams
 {
@@ -33,8 +34,49 @@ namespace FootballTeams
                 command.ExecuteNonQuery();
                 command.CommandText = $"DELETE FROM Address WHERE AddressID = {AddressID}";
                 command.ExecuteNonQuery();
-                command.CommandText = $"UPDATE Stats SET NumberOfPlayers = NumberOfPlayers - 1 WHERE TeamID={TeamID}";
+                command.CommandText = $"UPDATE Stats SET " +
+                    $"AvgGoals = AvgGoals * NumberOfPlayers / (NumberOfPlayers - 1), " +
+                    $"NumberOfPlayers = NumberOfPlayers - 1 " +
+                    $"WHERE TeamID={TeamID}";
                 command.ExecuteNonQuery();
+
+                // подтверждаем транзакцию
+                transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                transaction.Rollback();
+            }
+        }
+
+        public void ClearAll()
+        {
+            using SqlConnection connection = new(connectionString);
+            connection.Open();
+            SqlTransaction transaction = connection.BeginTransaction();
+
+            SqlCommand command = connection.CreateCommand();
+            command.Transaction = transaction;
+
+            try
+            {                      
+                command.CommandText = $"DELETE FROM Player";
+                command.ExecuteNonQuery();          
+                command.CommandText = $"DELETE FROM Address";
+                command.ExecuteNonQuery();
+
+                command.CommandText = $"DELETE FROM Stats";
+                command.ExecuteNonQuery();                
+                command.CommandText = $"DELETE FROM Team_Stadium";
+                command.ExecuteNonQuery();
+
+                command.CommandText = $"DELETE FROM Team";
+                command.ExecuteNonQuery();
+                
+                command.CommandText = $"DELETE FROM Stadium";
+                command.ExecuteNonQuery();
+
 
                 // подтверждаем транзакцию
                 transaction.Commit();

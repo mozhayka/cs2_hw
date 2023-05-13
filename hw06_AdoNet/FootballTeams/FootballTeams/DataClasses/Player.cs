@@ -44,5 +44,21 @@ namespace FootballTeams
             Team = SomeTeams.Team1,
             NumberOfGoals = 0
         };
+
+        public static Player Player2 = new()
+        {
+            FirstName = "snd_fn",
+            SecondName = "snd_sn",
+            Addr = new()
+            {
+                Country = "Ru",
+                City = "SPb",
+                Street = "str2",
+                Building = 7,
+                Apartment = 8,
+            },
+            Team = SomeTeams.Team1,
+            NumberOfGoals = 3
+        };
     }
 }
