@@ -1,12 +1,11 @@
 ﻿using Calculator;
 using Objects;
+using System.Text;
 
 namespace LunarCalendarVM
 {
     public class LunarCalendar : ILunarCalendar
     {
-        public DateTime Date { get; set; }
-        public Coordinates Coordinates { get; set; } = new();
         private readonly IDayInformationCalculator Calculator;
 
         public LunarCalendar(IDayInformationCalculator calculator)
@@ -14,31 +13,29 @@ namespace LunarCalendarVM
             Calculator = calculator;
         }
 
-        public DayInformation GetDayInformation()
+        public DayInformation GetDayInformation(DateTime Date)
         {
-            if (IsSavedInDB())
-            {
-                return LoadFromDB();
-            }
             var parameters = new CalculationParameters(Date);
             var dayInfo = Calculator.Calculate(parameters);
-            SaveToDB(dayInfo);
             return dayInfo;
         }
 
-        private bool IsSavedInDB()
+        public string InfoToString(DayInformation dayInfo)
         {
-            return false;
-        }
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"{dayInfo.Input.DateUTC}");
 
-        private DayInformation LoadFromDB()
-        {
-            throw new NotImplementedException();
-        }
+            var sign = $"{dayInfo.LunarPosition.StartSign}" + 
+                (dayInfo.LunarPosition.EndSign != dayInfo.LunarPosition.StartSign ? $", {dayInfo.LunarPosition.EndSign}" : "");
+            sb.AppendLine($"Луна в знаке: {sign}");
 
-        private void SaveToDB(DayInformation dayInformation)
-        {
-            // TODO implement DB
+            var phase = $"{dayInfo.LunarPosition.StartPhase}" +
+                (dayInfo.LunarPosition.EndPhase != dayInfo.LunarPosition.StartPhase ? $", {dayInfo.LunarPosition.EndPhase}" : "");
+            sb.AppendLine($"Фаза Луны: {phase}");
+
+            var ingression = $"{(dayInfo.LunarPosition.LunarIngression == null ? '-' : $"+\n знак {dayInfo.LunarPosition.EndSign}\n время {dayInfo.LunarPosition.LunarIngression}")}";
+            sb.AppendLine($"Ингрессия Луны: {ingression}");
+            return sb.ToString();
         }
     }
 }

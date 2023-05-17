@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Model\Calcula
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LunarCalendarVM", "ViewModel\LunarCalendarVM\LunarCalendarVM.csproj", "{A513C05B-C98F-4DEE-9F4A-1D75A30166EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfUI", "UI\WpfUI\WpfUI.csproj", "{761E86D0-50C0-4C25-BD6B-15096BFCEE3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{A513C05B-C98F-4DEE-9F4A-1D75A30166EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A513C05B-C98F-4DEE-9F4A-1D75A30166EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A513C05B-C98F-4DEE-9F4A-1D75A30166EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{761E86D0-50C0-4C25-BD6B-15096BFCEE3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{761E86D0-50C0-4C25-BD6B-15096BFCEE3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{761E86D0-50C0-4C25-BD6B-15096BFCEE3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{761E86D0-50C0-4C25-BD6B-15096BFCEE3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{477EE32B-88D4-43F7-8DB8-A1A357C552C2} = {B9129E2B-4A68-4B80-B9EA-130A530B80A7}
 		{ED9333EB-3BE9-4409-9EA6-F0C60849EB3B} = {39C81C28-D251-47DA-AE89-DE7BC73E40C5}
 		{A513C05B-C98F-4DEE-9F4A-1D75A30166EB} = {7426945E-03B0-406C-8F93-8AAA64B96837}
+		{761E86D0-50C0-4C25-BD6B-15096BFCEE3F} = {5903F493-1162-4937-8792-50BD48B7DDA8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77CE9704-1171-42E2-B121-AA61A9CA50B0}

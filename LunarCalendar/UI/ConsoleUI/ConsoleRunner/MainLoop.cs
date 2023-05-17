@@ -14,10 +14,9 @@ namespace ConsoleUI
             var lc = di.ServiceProvider.GetRequiredService<ILunarCalendar>();
 
             consoleWriter.Greetings();
-            lc.Date = consoleReader.ReadDate();
-            lc.Coordinates = consoleReader.ReadCoordinates();
+            var date = consoleReader.ReadDate();
 
-            consoleWriter.Print(lc.GetDayInformation());
+            consoleWriter.Print(lc.GetDayInformation(date));
         }
     }
 }

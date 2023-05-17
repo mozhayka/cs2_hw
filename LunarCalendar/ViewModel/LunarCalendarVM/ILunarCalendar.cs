@@ -4,9 +4,7 @@ namespace LunarCalendarVM
 {
     public interface ILunarCalendar
     {
-        public DateTime Date { get; set; }
-        public Coordinates Coordinates { get; set; }
-
-        public DayInformation GetDayInformation();
+        public DayInformation GetDayInformation(DateTime Date);
+        public string InfoToString(DayInformation dayInfo);
     }
 }
