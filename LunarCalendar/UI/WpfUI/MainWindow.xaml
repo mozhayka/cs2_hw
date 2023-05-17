@@ -7,7 +7,23 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="textBox1" Height="336" VerticalAlignment="Top" Margin="342,35,47,0" />
-        <Button x:Name="button1" Height="30" Content="Кнопка" Click="Button_Click" Margin="58,35,498,369" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="exampleList" SelectionChanged="Button_Click" Grid.Column="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="16" Text="{Binding Path=Text}" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <!--            <Button x:Name="button1" Content="Кнопка" Click="Button_Click"/> -->
+        </ListBox>
+        <TextBox Grid.Column="1" x:Name="textBox1"/>
     </Grid>
 </Window>

@@ -22,7 +22,7 @@ namespace LunarCalendarVM
 
         public string InfoToString(DayInformation dayInfo)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             sb.AppendLine($"{dayInfo.Input.DateUTC}");
 
             var sign = $"{dayInfo.LunarPosition.StartSign}" + 
