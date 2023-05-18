@@ -28,13 +28,14 @@ namespace Calculator
                 if (lbk1 != null)
                     lbKList.Add(lbk1);
 
-                var lbk2 = FindLBK(newSignJd, jdTo, jdFrom, jdTo, septener, parameters.Coordinates);
+                var nextNewSignJd = lunarCalculator.NextLunarSignTime(newSignJd + SecondJd, parameters.Coordinates);
+                var lbk2 = FindLBK(newSignJd, nextNewSignJd, jdFrom, jdTo, septener, parameters.Coordinates);
                 if (lbk2 != null)
                     lbKList.Add(lbk2);
             }
             else
             {
-                var lbk = FindLBK(jdFrom, jdTo, jdFrom, jdTo, septener, parameters.Coordinates);
+                var lbk = FindLBK(jdFrom, newSignJd, jdFrom, jdTo, septener, parameters.Coordinates);
                 if (lbk != null)
                     lbKList.Add(lbk);
             }

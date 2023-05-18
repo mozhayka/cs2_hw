@@ -33,11 +33,14 @@ namespace WpfUI
 
             Items = new ObservableCollection<ExampleItem>()
             {
-                new ExampleItem {Text = "Позавчера", Date = DateTime.Today.AddDays(-2)},
-                new ExampleItem {Text = "Вчера", Date = DateTime.Today.AddDays(-1)},
-                new ExampleItem {Text = "Сегодня", Date = DateTime.Today},
-                new ExampleItem {Text = "Завтра", Date = DateTime.Today.AddDays(1)},
-                new ExampleItem {Text = "Послезавтра", Date = DateTime.Today.AddDays(2)},
+                new ExampleItem {Text = "Позавчера", Date = DateTime.Today.AddDays(-2), UTC = 3},
+                new ExampleItem {Text = "Вчера", Date = DateTime.Today.AddDays(-1), UTC = 3},
+                new ExampleItem {Text = "Сегодня", Date = DateTime.Today, UTC = 3},
+                new ExampleItem {Text = "Завтра", Date = DateTime.Today.AddDays(1), UTC = 3},
+                new ExampleItem {Text = "Послезавтра", Date = DateTime.Today.AddDays(2), UTC = 3},
+                new ExampleItem {Text = "19.02.2021", Date = new DateTime(2021, 02, 19), UTC = 3},
+                new ExampleItem {Text = "13.05.2020", Date = new DateTime(2020, 05, 13), UTC = 3},
+                new ExampleItem {Text = "13.01.2020", Date = new DateTime(2020, 01, 13), UTC = 3},
             };
             exampleList.ItemsSource = Items;
         }
@@ -45,9 +48,8 @@ namespace WpfUI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var p = (ExampleItem)exampleList.SelectedItem;
-            var date = p.Date;
             var lc = di.ServiceProvider.GetRequiredService<ILunarCalendar>();
-            textBox1.Text = lc.InfoToString(lc.GetDayInformation(date));
+            textBox1.Text = lc.GetDayInfoRus(p.Date, p.UTC);
         }
     }
 }

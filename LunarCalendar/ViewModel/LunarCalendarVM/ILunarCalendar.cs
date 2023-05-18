@@ -5,6 +5,6 @@ namespace LunarCalendarVM
     public interface ILunarCalendar
     {
         public DayInformation GetDayInformation(DateTime Date);
-        public string InfoToString(DayInformation dayInfo);
+        public string GetDayInfoRus(DateTime Date, int UTC);
     }
 }

@@ -43,6 +43,7 @@ namespace TestProject.Tests_Calculator.Answers
         {
             Assert.Multiple(() =>
             {
+                Assert.That(actual, Has.Count.EqualTo(expected.Count));
                 for (int i = 0; i < expected.Count; i++)
                 {
                     Assert.That(actual[i].From, Is.EqualTo(expected[i].From).Within(TimeSpan.FromMinutes(1)));
