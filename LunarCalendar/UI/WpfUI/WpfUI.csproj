@@ -8,6 +8,10 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\ad.jpg" />
+  </ItemGroup>
+
     <ItemGroup>
 	    <None Include="..\..\Model\Calculator\Helper\SwissEphemeris\swedll32.dll" Link="swedll32.dll">
 		    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -20,6 +24,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ViewModel\LunarCalendarVM\LunarCalendarVM.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\ad.jpg" />
   </ItemGroup>
 
 </Project>

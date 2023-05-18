@@ -7,14 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.7*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="exampleList" SelectionChanged="Button_Click" Grid.Column="0">
+        <ListBox Grid.Column="0" x:Name="exampleList" SelectionChanged="Button_Click">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
@@ -22,8 +19,18 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-            <!--            <Button x:Name="button1" Content="Кнопка" Click="Button_Click"/> -->
         </ListBox>
-        <TextBox Grid.Column="1" x:Name="textBox1"/>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.5*" />
+            </Grid.RowDefinitions>
+            
+            <TextBox Grid.Row="0" x:Name="textBox1"/>
+
+            <Image Grid.Row="1" Source="Images/ad.jpg" />
+
+        </Grid>
     </Grid>
 </Window>
