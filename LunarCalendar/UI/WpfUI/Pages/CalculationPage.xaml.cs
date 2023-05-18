@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LunarCalendarVM;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,23 @@ namespace WpfUI.Pages
     /// </summary>
     public partial class CalculationPage : Page
     {
+        private readonly DIContainer di = new();
+
         public CalculationPage()
         {
             InitializeComponent();
+
+            utcPicker.ItemsSource = new int[] { -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            utcPicker.SelectedItem = 3;
+            datePicker.SelectedDate = DateTime.Now;
+        }
+
+        private void Button_Calculate(object sender, RoutedEventArgs e)
+        {
+            var date = datePicker.DisplayDate;
+            var utc = (int)utcPicker.SelectedItem;
+            var lc = di.ServiceProvider.GetRequiredService<ILunarCalendar>();
+            textBox1.Text = lc.GetDayInfoRus(date, utc);
         }
     }
 }

@@ -3,11 +3,40 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WpfUI.Pages"
+      xmlns:local="clr-namespace:WpfUI.Pages" xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="550"
       Title="CalculationPage">
 
     <Grid>
-        <Image Height="auto" Source="../Images/ad.jpg" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <DatePicker Grid.Row="0" Name="datePicker" VerticalAlignment="Center" SelectedDateFormat="Short"/>
+            <Grid Grid.Row="1" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <ComboBox Grid.Column="0" Name="utcPicker" VerticalAlignment="Bottom"/>
+                <TextBlock Grid.Column="1" Text="UTC"/>
+            </Grid>
+
+            <Button Grid.Row="2" Content ="Calculate"  HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Calculate" FontSize="18"/>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <TextBox Grid.Row="0" x:Name="textBox1"/>
+        </Grid>
     </Grid>
 </Page>
