@@ -24,18 +24,28 @@ namespace LunarCalendarVM
         {
             StringBuilder sb = new();
             sb.AppendLine($"{dayInfo.Input.DateUTC}");
+            sb.AppendLine($"Луна в знаке: {GetSign(dayInfo)}");
+            sb.AppendLine($"Фаза Луны: {GetPhase(dayInfo)}");
+            sb.AppendLine($"Ингрессия Луны: {GetIngression(dayInfo)}");
 
-            var sign = $"{dayInfo.LunarPosition.StartSign}" + 
-                (dayInfo.LunarPosition.EndSign != dayInfo.LunarPosition.StartSign ? $", {dayInfo.LunarPosition.EndSign}" : "");
-            sb.AppendLine($"Луна в знаке: {sign}");
-
-            var phase = $"{dayInfo.LunarPosition.StartPhase}" +
-                (dayInfo.LunarPosition.EndPhase != dayInfo.LunarPosition.StartPhase ? $", {dayInfo.LunarPosition.EndPhase}" : "");
-            sb.AppendLine($"Фаза Луны: {phase}");
-
-            var ingression = $"{(dayInfo.LunarPosition.LunarIngression == null ? '-' : $"+\n знак {dayInfo.LunarPosition.EndSign}\n время {dayInfo.LunarPosition.LunarIngression}")}";
-            sb.AppendLine($"Ингрессия Луны: {ingression}");
             return sb.ToString();
+        }
+
+        private string GetSign(DayInformation dayInfo)
+        {
+            return $"{RussianTranslator.ToRussian(dayInfo.LunarPosition.StartSign)}" +
+                (dayInfo.LunarPosition.EndSign != dayInfo.LunarPosition.StartSign ? $", {RussianTranslator.ToRussian(dayInfo.LunarPosition.EndSign)}" : "");
+        }
+
+        private string GetPhase(DayInformation dayInfo)
+        {
+            return $"{RussianTranslator.ToRussian(dayInfo.LunarPosition.StartPhase)}" +
+                (dayInfo.LunarPosition.EndPhase != dayInfo.LunarPosition.StartPhase ? $", {RussianTranslator.ToRussian(dayInfo.LunarPosition.EndPhase)}" : "");
+        }
+
+        private string GetIngression(DayInformation dayInfo)
+        {
+            return $"{(dayInfo.LunarPosition.LunarIngression == null ? '-' : $"+\n знак {RussianTranslator.ToRussian(dayInfo.LunarPosition.EndSign)}\n время {dayInfo.LunarPosition.LunarIngression}")}";
         }
     }
 }

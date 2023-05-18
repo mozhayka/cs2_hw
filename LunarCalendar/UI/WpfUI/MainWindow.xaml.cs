@@ -24,7 +24,7 @@ namespace WpfUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DIContainer di = new();
+        private readonly DIContainer di = new();
         public ObservableCollection<ExampleItem> Items { get; set; }
 
         public MainWindow()
@@ -33,8 +33,11 @@ namespace WpfUI
 
             Items = new ObservableCollection<ExampleItem>()
             {
-                new ExampleItem {Text = "Today", Date = DateTime.Today},
-                new ExampleItem {Text = "Tomorrow", Date = DateTime.Today.AddDays(1)},
+                new ExampleItem {Text = "Позавчера", Date = DateTime.Today.AddDays(-2)},
+                new ExampleItem {Text = "Вчера", Date = DateTime.Today.AddDays(-1)},
+                new ExampleItem {Text = "Сегодня", Date = DateTime.Today},
+                new ExampleItem {Text = "Завтра", Date = DateTime.Today.AddDays(1)},
+                new ExampleItem {Text = "Послезавтра", Date = DateTime.Today.AddDays(2)},
             };
             exampleList.ItemsSource = Items;
         }
