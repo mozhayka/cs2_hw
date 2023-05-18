@@ -30,8 +30,4 @@
     <Resource Include="Images\ad.jpg" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\" />
-  </ItemGroup>
-
 </Project>

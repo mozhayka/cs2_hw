@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using WpfUI.Pages;
 
 namespace WpfUI
 {
@@ -38,6 +39,11 @@ namespace WpfUI
             var p = (ExampleItem)exampleList.SelectedItem;
             var lc = di.ServiceProvider.GetRequiredService<ILunarCalendar>();
             textBox1.Text = lc.GetDayInfoRus(p.Date, p.UTC);
+        }
+
+        private void Button_GoToCalculate(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CalculationPage());
         }
     }
 }

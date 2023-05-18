@@ -7,5 +7,5 @@
         mc:Ignorable="d"    
         Title="Navigation Window" Height="600" Width="550" 
         Background="AliceBlue" 
-        Source="MainPage.xaml">
+        Source="Pages/MainPage.xaml">
 </NavigationWindow>
