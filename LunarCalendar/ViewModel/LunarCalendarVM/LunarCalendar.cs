@@ -24,7 +24,7 @@ namespace LunarCalendarVM
         {
             DayInformation dayInfo = GetDayInformation(Date.AddHours(-UTC));
             StringBuilder sb = new();
-            sb.AppendLine($"{dayInfo.Input.DateUTC.AddHours(UTC):D} UTC {(UTC >= 0 ? "+" : "")}{UTC}");
+            sb.AppendLine($"{dayInfo.Input.DateUTC.AddHours(UTC):ddd}, {dayInfo.Input.DateUTC.AddHours(UTC):D} UTC {(UTC >= 0 ? "+" : "")}{UTC}");
             sb.AppendLine($"Луна в знаке: {GetSign(dayInfo)}");
             sb.AppendLine($"Фаза Луны: {GetPhase(dayInfo)}");
             sb.AppendLine($"");
