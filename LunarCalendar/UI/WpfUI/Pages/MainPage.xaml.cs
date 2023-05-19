@@ -22,16 +22,16 @@ namespace WpfUI
 
             Items = new ObservableCollection<ExampleItem>()
                 {
-                    new ExampleItem {Text = "Позавчера", Date = DateTime.Today.AddDays(-2), UTC = 3},
-                    new ExampleItem {Text = "Вчера", Date = DateTime.Today.AddDays(-1), UTC = 3},
-                    new ExampleItem {Text = "Сегодня", Date = DateTime.Today, UTC = 3},
-                    new ExampleItem {Text = "Завтра", Date = DateTime.Today.AddDays(1), UTC = 3},
-                    new ExampleItem {Text = "Послезавтра", Date = DateTime.Today.AddDays(2), UTC = 3},
-                    new ExampleItem {Text = "19.02.2021", Date = new DateTime(2021, 02, 19), UTC = 3},
-                    new ExampleItem {Text = "13.05.2020", Date = new DateTime(2020, 05, 13), UTC = 3},
-                    new ExampleItem {Text = "13.01.2020", Date = new DateTime(2020, 01, 13), UTC = 3},
+                    new ExampleItem(DateTime.Today.AddDays(-2)),
+                    new ExampleItem(DateTime.Today.AddDays(-1)),
+                    new ExampleItem(DateTime.Today),
+                    new ExampleItem(DateTime.Today.AddDays(1)),
+                    new ExampleItem(DateTime.Today.AddDays(2)),
+                    new ExampleItem(DateTime.Today.AddDays(3)),
+                    new ExampleItem(DateTime.Today.AddDays(4)),
                 };
             exampleList.ItemsSource = Items;
+            exampleList.SelectedItem = Items[2];
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

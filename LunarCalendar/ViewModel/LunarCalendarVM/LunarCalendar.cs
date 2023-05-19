@@ -52,7 +52,7 @@ namespace LunarCalendarVM
 
         private string GetIngression(DayInformation dayInfo, int UTC)
         {
-            return $"{(dayInfo.LunarPosition.LunarIngression == null ? '-' : $"+\n знак {RussianTranslator.ToRussian(dayInfo.LunarPosition.EndSign)}\n время {((DateTime)dayInfo.LunarPosition.LunarIngression).AddHours(UTC)}")}";
+            return $"{(dayInfo.LunarPosition.LunarIngression == null ? '-' : $"+\n знак {RussianTranslator.ToRussian(dayInfo.LunarPosition.EndSign)}\n время {((DateTime)dayInfo.LunarPosition.LunarIngression).AddHours(UTC):t}")}";
         }
 
         private string GetLBK(List<LBK> LBK, int UTC)
