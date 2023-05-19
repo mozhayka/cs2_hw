@@ -18,13 +18,13 @@ namespace Objects
     {
         public static LunarPhase FromAngle(double moonSunAngle)
         {
-            if (315 <= moonSunAngle || moonSunAngle < 45)
+            if (0 <= moonSunAngle && moonSunAngle < 90)
                 return LunarPhase.New_Moon;
-            if (45 <= moonSunAngle && moonSunAngle < 135)
+            if (90 <= moonSunAngle && moonSunAngle < 180)
                 return LunarPhase.First_Quarter;
-            if (135 <= moonSunAngle && moonSunAngle < 225)
+            if (180 <= moonSunAngle && moonSunAngle < 270)
                 return LunarPhase.Full_Moon;
-            if (225 <= moonSunAngle && moonSunAngle < 315)
+            if (270 <= moonSunAngle && moonSunAngle < 360)
                 return LunarPhase.Last_Quarter;
             throw new Exception($"Bad moon sun angle {moonSunAngle}");
         }

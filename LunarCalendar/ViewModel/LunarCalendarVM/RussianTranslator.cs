@@ -22,14 +22,26 @@ namespace LunarCalendarVM
             };
         }
 
-        public static string ToRussian(LunarPhase lp)
+        public static string ToRussianExact(LunarPhase lp)
         {
             return lp switch
             {
-                LunarPhase.New_Moon => "1 четверть",
-                LunarPhase.First_Quarter => "2 четверть",
-                LunarPhase.Full_Moon => "3 четверть",
-                LunarPhase.Last_Quarter => "4 четверть",
+                LunarPhase.New_Moon => "Новолуние",
+                LunarPhase.First_Quarter => "1 четверть",
+                LunarPhase.Full_Moon => "Полнолуние",
+                LunarPhase.Last_Quarter => "3 четверть",
+                _ => throw new Exception("Unknown phase"),
+            };
+        }
+
+        public static string ToRussianPeriod(LunarPhase lp)
+        {
+            return lp switch
+            {
+                LunarPhase.New_Moon => "Растущая Луна после новолуния",
+                LunarPhase.First_Quarter => "Растущая Луна после 1 четверти",
+                LunarPhase.Full_Moon => "Убывающая Луна после полнолуния",
+                LunarPhase.Last_Quarter => "Убывающая луна после 3 четверти",
                 _ => throw new Exception("Unknown phase"),
             };
         }

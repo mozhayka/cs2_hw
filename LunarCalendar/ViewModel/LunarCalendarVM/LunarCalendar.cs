@@ -46,8 +46,9 @@ namespace LunarCalendarVM
 
         private string GetPhase(DayInformation dayInfo)
         {
-            return $"{RussianTranslator.ToRussian(dayInfo.LunarPosition.StartPhase)}" +
-                (dayInfo.LunarPosition.EndPhase != dayInfo.LunarPosition.StartPhase ? $", {RussianTranslator.ToRussian(dayInfo.LunarPosition.EndPhase)}" : "");
+            return (dayInfo.LunarPosition.StartPhase == dayInfo.LunarPosition.EndPhase) ? 
+               RussianTranslator.ToRussianPeriod(dayInfo.LunarPosition.EndPhase) : 
+               RussianTranslator.ToRussianExact(dayInfo.LunarPosition.EndPhase);
         }
 
         private string GetIngression(DayInformation dayInfo, int UTC)
