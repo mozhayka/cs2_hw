@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Height="Auto" Background="#FF4572A0">
-            <Button Content ="Calculate"  HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_GoToCalculate" FontSize="18"/>
+            <Button Content ="Посчитать выбранную дату"  HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_GoToCalculate" FontSize="18"/>
         </Grid>
 
         <Grid Grid.Row="1">
