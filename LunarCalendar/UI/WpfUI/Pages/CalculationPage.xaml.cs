@@ -35,7 +35,7 @@ namespace WpfUI.Pages
 
         private void Button_Calculate(object sender, RoutedEventArgs e)
         {
-            var date = datePicker.DisplayDate;
+            DateTime date = datePicker.SelectedDate ?? DateTime.Now;
             var utc = (int)utcPicker.SelectedItem;
             var lc = di.ServiceProvider.GetRequiredService<ILunarCalendar>();
             textBox1.Text = lc.GetDayInfoRus(date, utc);

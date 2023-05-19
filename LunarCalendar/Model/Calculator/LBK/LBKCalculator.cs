@@ -18,7 +18,7 @@ namespace Calculator
         public List<LBK> FindAllLBK(CalculationParameters parameters, bool septener)
         {
             var jdFrom = TimeCalculator.GetJulDay(parameters.DateUTC);
-            var jdTo = TimeCalculator.GetJulDay(parameters.DateUTC.AddDays(1));
+            var jdTo = TimeCalculator.GetJulDay(parameters.DateUTC.AddDays(1)) - SecondJd;
             List<LBK> lbKList = new();
 
             var newSignJd = lunarCalculator.NextLunarSignTime(jdFrom, parameters.Coordinates);
